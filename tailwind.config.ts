@@ -22,6 +22,7 @@ const config = {
       colors: {
         apex: {
           dark: "hsl(var(--apex-dark))",
+          blue: "hsl(var(--apex-blue))",
           orange: "hsl(var(--apex-orange))",
           yellow: "hsl(var(--apex-yellow))",
           grey: {
