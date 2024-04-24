@@ -72,6 +72,25 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
+      backgroundColor: {
+        apex: {
+          dark: "hsl(var(--apex-dark))",
+          blue: "hsl(var(--apex-blue))",
+          orange: "hsl(var(--apex-orange))",
+          yellow: "hsl(var(--apex-yellow))",
+          grey: {
+            dark: "hsl(var(--apex-grey-dark))",
+            medium: "hsl(var(--apex-grey-medium))",
+            light: "hsl(var(--apex-grey-light))",
+            bluish: "hsl(var(--apex-bluish-grey))",
+          },
+          green: {
+            DEFAULT: "hsl(var(--apex-green))",
+            sea: "hsl(var(--apex-sea-green))",
+            dark: "hsl(var(--apex-dark-green))",
+          },
+        },
+      },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
