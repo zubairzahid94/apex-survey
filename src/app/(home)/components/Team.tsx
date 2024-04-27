@@ -40,17 +40,17 @@ const Team = () => {
           nearly 40 years we have been Making Buildings Better.
         </p>
       </div>
-      <div className="flex flex-col flex-wrap md:flex-row gap-3 w-full">
+      <div className="flex flex-col flex-wrap justify-between md:flex-row gap-3 w-full">
         {teamCards.map((member, index) => (
           <article
             key={index}
-            className="flex flex-col items-center gap-4 w-full md:w-1/4"
+            className="flex flex-col items-center gap-4 w-full md:w-[220px]"
           >
             <Image
               src={member.image}
               alt={member.name}
-              width={200}
-              height={200}
+              width={1000}
+              height={1000}
               className="object-cover size-full"
             />
             <div className="flex flex-col items-center w-max gap-2">
