@@ -68,7 +68,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="flex flex-col w-full sticky top-0">
+    <header className="flex flex-col w-full">
       <div className="flex flex-col md:flex-row w-full items-center justify-between px-16 py-2 bg-apex-dark h-max">
         <Link href="/">
           <h4 className="text-h4 text-white">
@@ -100,7 +100,7 @@ const Header = () => {
           ))}
         </div>
       </div>
-      <nav className="h-max bg-apex-grey-bluish flex flex-col md:flex-row items-center justify-between px-16 py-4 gap-4">
+      <nav className="h-max bg-apex-grey-bluish flex flex-col md:flex-row items-center justify-between px-16 py-4 gap-4 sticky top-0 z-50">
         <div className="flex gap-6 w-max items-center">
           {navLinks.map((link) => (
             <Link href={link.path} key={link.path}>
