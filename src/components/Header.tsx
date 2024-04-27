@@ -7,6 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import Navbar from "./Navbar";
 
 export const navLinks = [
   {
@@ -102,11 +103,7 @@ const Header = () => {
       </div>
       <nav className="h-max bg-apex-grey-bluish flex flex-col md:flex-row items-center justify-between px-16 py-4 gap-4 sticky top-0 z-50">
         <div className="flex gap-6 w-max items-center">
-          {navLinks.map((link) => (
-            <Link href={link.path} key={link.path}>
-              <p className="text-para text-white">{link.name}</p>
-            </Link>
-          ))}
+          <Navbar />
           <DropdownMenu>
             <DropdownMenuTrigger className="flex flex-row gap-2 items-center">
               <p className="text-para text-white">Our Services</p>
