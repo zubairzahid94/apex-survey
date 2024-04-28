@@ -12,7 +12,7 @@ const perks = [
 
 export function PricingCard() {
   return (
-    <Card className="w-full px-6 max-w-md mx-auto border-apex-grey-dark border-t-apex-grey-light border-t-[24px] rounded-xl">
+    <Card className="w-80 h-auto px-6 mx-auto border-apex-grey-dark border-t-apex-grey-light border-t-[24px] rounded-xl">
       <CardHeader className="text-center border-t-apex-dark">
         <h3 className="text-2xl font-bold">Starter Plan</h3>
       </CardHeader>

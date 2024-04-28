@@ -67,7 +67,7 @@ const ServiceProcedure = () => {
             {index < serviceSteps.length - 1 && (
               <div className="absolute -bottom-24 right-1/3 lg:top-0 lg:-right-10 size-24">
                 <Image
-                  src={"icons/curvy-arrow.svg"}
+                  src={"/icons/curvy-arrow.svg"}
                   alt="Curvy Arrow"
                   width={50}
                   height={50}
