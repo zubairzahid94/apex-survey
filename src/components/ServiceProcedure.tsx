@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
 
-const serviceSteps = [
+export const serviceSteps = [
   {
     icon: "/icons/cart.svg",
     heading: "Place Order Online",
