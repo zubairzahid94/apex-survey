@@ -3,27 +3,27 @@ import React from "react";
 
 const teamCards = [
   {
-    image: "/team-member-1.png",
+    image: "/Team-member-1.png",
     name: "Andy Cambell",
     position: "Senior Software Engineer",
   },
   {
-    image: "/team-member-2.png",
+    image: "/Team-member-2.png",
     name: "Andy Cambell",
     position: "Senior Software Engineer",
   },
   {
-    image: "/team-member-3.png",
+    image: "/Team-member-3.png",
     name: "Andy Cambell",
     position: "Senior Software Engineer",
   },
   {
-    image: "/team-member-4.png",
+    image: "/Team-member-4.png",
     name: "Andy Cambell",
     position: "Senior Software Engineer",
   },
   {
-    image: "/team-member-5.png",
+    image: "/Team-member-5.png",
     name: "Andy Cambell",
     position: "Senior Software Engineer",
   },
