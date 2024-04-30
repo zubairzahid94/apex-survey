@@ -49,8 +49,9 @@ const ElectricalMaintenance = ({ params }: ElectricalMaintenanceProps) => {
             <Image
               src={"/electrical-ppm-image.png"}
               alt="Electrical PPM"
-              height={400}
-              width={400}
+              height={1000}
+              width={1000}
+              quality={100}
               className="object-cover size-full"
             />
           </div>

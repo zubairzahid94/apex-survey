@@ -11,7 +11,7 @@ export default function Hero() {
             alt="Empowering Your Property Journey"
             className="w-full h-full object-cover"
             height="718"
-            src="/placeholder.svg"
+            src="/Hero-Banner.png"
             style={{
               aspectRatio: "1299/718",
               objectFit: "cover",
@@ -61,8 +61,9 @@ export default function Hero() {
           <Image
             src={"/pngwing 1.png"}
             alt="Hero Image"
-            width={100}
-            height={100}
+            width={1000}
+            height={1000}
+            quality={100}
             className="object-contain size-full md:size-[90%]"
           />
           <div className="bg-apex-grey-bluish flex gap-8 items-center h-40 px-8">

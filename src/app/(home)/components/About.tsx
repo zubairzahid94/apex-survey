@@ -8,8 +8,9 @@ const About = () => {
         <Image
           src={"/About-us-image.png"}
           alt={"About Us Image"}
-          width={500}
-          height={500}
+          width={1000}
+          height={1000}
+          quality={100}
           className={"object-cover size-full"}
         />
       </div>
