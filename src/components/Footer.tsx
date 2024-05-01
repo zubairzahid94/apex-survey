@@ -85,7 +85,9 @@ export default function Footer() {
             <div className="flex flex-col gap-4">
               {usefulLinks.map((link) => (
                 <Link href={link.path} key={link.path}>
-                  <p className="text-para text-white">{link.name}</p>
+                  <p className="text-para text-white sm xs:w-20 lg:w-fit">
+                    {link.name}
+                  </p>
                 </Link>
               ))}
             </div>

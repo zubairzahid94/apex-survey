@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import Navbar from "./Navbar";
+import MobileNavbarMenu from "./MobileNavbarMenu";
 
 export const navLinks = [
   {
@@ -70,13 +71,13 @@ const Header = () => {
 
   return (
     <header className="flex flex-col w-full">
-      <div className="flex flex-col md:flex-row w-full items-center justify-between px-16 py-2 bg-apex-dark h-max">
+      <div className="flex flex-row w-full items-center justify-between px-4 lg:px-16 py-2 bg-apex-dark h-max">
         <Link href="/">
           <h4 className="text-h4 text-white">
             Apex<span className="text-apex-blue">Survey</span>
           </h4>
         </Link>
-        <div className="flex md:flex-row flex-col items-center gap-x-8 gap-y-2 my-4">
+        <div className="hidden lg:flex flex-row items-center gap-x-8 gap-y-2 my-4">
           {contactLinks.map((link) => (
             <Link
               href={
@@ -100,8 +101,12 @@ const Header = () => {
             </Link>
           ))}
         </div>
+        <MobileNavbarMenu
+          navLinks={navLinks}
+          serviceDropdownLinks={servicesDropdownLinks}
+        />
       </div>
-      <nav className="h-max bg-apex-grey-bluish flex flex-col md:flex-row items-center justify-between px-16 py-4 gap-4 sticky top-0 z-50">
+      <nav className="h-max bg-apex-grey-bluish hidden lg:flex flex-col md:flex-row items-center justify-between px-16 py-4 gap-4 sticky top-0 z-50">
         <div className="flex gap-6 w-max items-center">
           <Navbar />
           <DropdownMenu>

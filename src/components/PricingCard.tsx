@@ -12,14 +12,14 @@ const perks = [
 
 export function PricingCard() {
   return (
-    <Card className="w-80 h-auto px-6 mx-auto border-apex-grey-dark border-t-apex-grey-light border-t-[24px] rounded-xl">
-      <CardHeader className="text-center border-t-apex-dark">
+    <Card className="w-[48%] lg:w-80 h-auto px-3 mx-auto lg:border-apex-grey-dark lg:border-t-apex-grey-light lg:border-t-[24px] rounded-xl">
+      <CardHeader className="text-center lg:border-t-apex-dark">
         <h3 className="text-2xl font-bold">Starter Plan</h3>
       </CardHeader>
-      <CardContent className="space-y-6 p-6">
+      <CardContent className="space-y-6 p-3 lg:p-6">
         <div className="text-center">
-          <span className="text-5xl font-bold">$19</span>
-          <span className="text-gray-500 dark:text-gray-400">/month</span>
+          <sup className="text-xs font-bold">$</sup>
+          <span className="text-h4">129</span>
         </div>
         <div className="space-y-3">
           {perks.map((perk, index) => (

@@ -67,7 +67,7 @@ const About = () => {
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa,
               nobis?
             </p>
-            <h5 className="text-btn">Zander Jones - Apex Survey</h5>
+            <h5 className="text-para font-bold lg:text-btn ">Zander Jones - Apex Survey</h5>
           </div>
           <div className="flex items-center justify-center size-10 absolute bottom-6 right-6">
             <Image
