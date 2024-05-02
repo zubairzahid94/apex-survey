@@ -49,8 +49,9 @@ const ElectricalMaintenance = ({ params }: ElectricalMaintenanceProps) => {
             <Image
               src={"/electrical-ppm-image.png"}
               alt="Electrical PPM"
-              height={400}
-              width={400}
+              height={1000}
+              width={1000}
+              quality={100}
               className="object-cover size-full"
             />
           </div>
@@ -60,7 +61,7 @@ const ElectricalMaintenance = ({ params }: ElectricalMaintenanceProps) => {
             <p className="text-para">Pricing</p>
             <h3 className="text-h3">Prices of Services We Offer</h3>
           </div>
-          <div className="flex flex-col flex-wrap md:flex-row gap-2 gap-y-6">
+          <div className="flex flex-wrap flex-row gap-2">
             {Array.from({ length: 4 }).map((_, index) => (
               <PricingCard key={index} />
             ))}

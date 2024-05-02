@@ -8,8 +8,9 @@ const About = () => {
         <Image
           src={"/About-us-image.png"}
           alt={"About Us Image"}
-          width={500}
-          height={500}
+          width={1000}
+          height={1000}
+          quality={100}
           className={"object-cover size-full"}
         />
       </div>
@@ -66,7 +67,7 @@ const About = () => {
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa,
               nobis?
             </p>
-            <h5 className="text-btn">Zander Jones - Apex Survey</h5>
+            <h5 className="text-para font-bold lg:text-btn ">Zander Jones - Apex Survey</h5>
           </div>
           <div className="flex items-center justify-center size-10 absolute bottom-6 right-6">
             <Image

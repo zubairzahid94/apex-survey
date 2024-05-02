@@ -51,6 +51,7 @@ const Team = () => {
               alt={member.name}
               width={1000}
               height={1000}
+              quality={100}
               className="object-cover size-full"
             />
             <div className="flex flex-col items-center w-max gap-2">

@@ -18,7 +18,7 @@ export default async function Home() {
           <p className="text-para">Pricing</p>
           <h3 className="text-h3">Prices of Services We Offer</h3>
         </div>
-        <div className="flex flex-col flex-wrap md:flex-row gap-2">
+        <div className="flex flex-wrap flex-row gap-2">
           {Array.from({ length: 4 }).map((_, index) => (
             <PricingCard key={index} />
           ))}

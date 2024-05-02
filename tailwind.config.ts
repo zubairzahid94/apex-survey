@@ -15,6 +15,7 @@ const config = {
       center: true,
       padding: "2rem",
       screens: {
+        "xs": "390px",
         "2xl": "1400px",
       },
     },
@@ -71,6 +72,9 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+      },
+      screens: {
+        xs: "390px",
       },
       backgroundColor: {
         apex: {

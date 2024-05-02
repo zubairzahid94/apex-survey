@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { navLinks, servicesDropdownLinks } from "./Header";
+import { navLinks } from "./Header";
 
 export default function Footer() {
   const socialLinks = [
@@ -34,6 +34,25 @@ export default function Footer() {
     },
   ];
 
+  const usefulLinks = [
+    {
+      name: "How it Works",
+      path: "/how-it-works",
+    },
+    {
+      name: "Who need Electrical Installation Report",
+      path: "/electrical-installation-report",
+    },
+    {
+      name: "Who need Energy Performance Certificate",
+      path: "/energy-performance-certificate",
+    },
+    {
+      name: "Terms and Conditions",
+      path: "/terms-and-conditions",
+    },
+  ];
+
   return (
     <footer className="bg-apex-dark flex flex-col gap-12 w-full px-8 py-3 md:px-16 md:py-6">
       <div className="flex flex-col lg:flex-row justify-between gap-y-6">
@@ -64,9 +83,11 @@ export default function Footer() {
           <nav className="flex flex-col gap-6">
             <h5 className="text-btn text-white">Useful Links</h5>
             <div className="flex flex-col gap-4">
-              {servicesDropdownLinks.map((link) => (
+              {usefulLinks.map((link) => (
                 <Link href={link.path} key={link.path}>
-                  <p className="text-para text-white">{link.name}</p>
+                  <p className="text-para text-white sm xs:w-20 lg:w-fit">
+                    {link.name}
+                  </p>
                 </Link>
               ))}
             </div>

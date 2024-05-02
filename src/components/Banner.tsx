@@ -14,8 +14,9 @@ const Banner = ({ image, children, className }: BannerProps) => {
       <div className="absolute inset-0">
         <Image
           src={image}
-          width={500}
-          height={500}
+          width={1000}
+          height={1000}
+          quality={100}
           alt="BannerImage"
           className="object-cover size-full"
         />
