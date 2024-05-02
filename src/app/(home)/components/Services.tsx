@@ -30,16 +30,16 @@ const serviceCards = [
 
 const Services = () => {
   return (
-    <section className="px-6 flex flex-col gap-4">
+    <section className="px-6 flex flex-col gap-4 mb-auto lg:mb-20">
       <div className="space-y-1">
         <p className="text-para">Popular Services</p>
         <h3 className="text-h4 lg:text-h3">What Services We Offer</h3>
       </div>
-      <div className="flex flex-row flex-wrap gap-2">
+      <div className="flex flex-row flex-wrap gap-2 justify-between">
         {serviceCards.map((card, index) => (
           <article
             key={index}
-            className="flex flex-col items-center gap-6 relative mb-20 lg:mb-auto justify-center flex-nowrap w-[48%] lg:w-[25%]"
+            className="flex flex-col items-center relative gap-4 mb-20 lg:mb-auto justify-center lg:justify-between flex-nowrap w-[48%] lg:w-[24%]"
           >
             <div className="flex items-center justify-center w-full">
               <Image

@@ -28,7 +28,7 @@ const ContactUs = () => {
         <p className="text-para text-white">Contact Us</p>
         <h5 className="text-h5 text-white">For Any Queries</h5>
       </Banner>
-      <section className="flex flex-col md:flex-row items-center m-10 h-screen">
+      <section className="flex flex-col md:flex-row items-center m-10 min-h-screen">
         <div className="w-full h-full md:w-1/2 bg-apex-blue px-5 py-10 flex flex-col items-center justify-center gap-4 rounded-t-xl rounded-b-none md:rounded-l-xl md:rounded-r-none shadow-lg">
           <h4 className="text-h4 text-white">Contact Us</h4>
           <div className="flex flex-col gap-4 w-full md:w-max">
