@@ -143,13 +143,12 @@ const Header = () => {
               className="object-cover size-full"
             />
           </Link>
-          <Button
-            className="bg-apex-blue rounded-sm hover:bg-apex-blue active:bg-apex-blue"
-            size="sm"
-            variant="secondary"
+          <Link
+            className="bg-apex-blue p-3 rounded-sm hover:bg-apex-blue active:bg-apex-blue"
+            href={"/order-now"}
           >
             <p className="text-small font-bold text-white">Order Online</p>
-          </Button>
+          </Link>
         </div>
       </nav>
     </header>
