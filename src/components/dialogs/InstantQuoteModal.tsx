@@ -93,23 +93,27 @@ export const bedroomOptions = [
 ];
 
 export const InstantQuoteSchema = z.object({
-  propertyType: z.string().refine((value) => value !== "", {
-    message: "Please select a property type",
-  }),
-  services: z.array(z.string()).refine((value) => value.length > 0, {
+  propertyType: z
+    .string({
+      required_error: "Please select a property type",
+    })
+    .min(1, {
+      message: "Please select a property type",
+    }),
+  services: z.array(z.string()).min(1, {
     message: "Please select at least one service",
   }),
-  property: z.string().refine((value) => value !== "", {
+  property: z.string().min(1, {
     message: "Please select a property",
   }),
-  noOfBedrooms: z.string().refine((value) => value !== "", {
-    message: "Please enter number of bedrooms",
+  noOfBedrooms: z.string().min(1, {
+    message: "Please select number of bedrooms",
   }),
-  noOfFuseBoxes: z.number().refine((value) => value > 0, {
-    message: "Please enter number of fuse boxes",
+  noOfFuseBoxes: z.number().min(1, {
+    message: "Atleast one fuse box is required",
   }),
-  postCode: z.string().refine((value) => value !== "", {
-    message: "Please enter postcode",
+  postCode: z.string().min(1, {
+    message: "Please enter your postcode",
   }),
 });
 
