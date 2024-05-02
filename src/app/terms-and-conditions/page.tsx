@@ -1,41 +1,9 @@
 import Banner from "@/components/Banner";
+import { termsAndConditions } from "@/lib/constants";
 import Link from "next/link";
 import React from "react";
 
-const termsAndConditions = [
-  {
-    title: "Scope of Work:",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam numquam, quae totam tempore quibusdam minus vitae dolorem. Tempora, illo dolorem.",
-  },
-  {
-    title: "Client Responsibilities:",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam numquam, quae totam tempore quibusdam minus vitae dolorem. Tempora, illo dolorem.",
-  },
-  {
-    title: "Contract Duration:",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam numquam, quae totam tempore quibusdam minus vitae dolorem. Tempora, illo dolorem.",
-  },
-  {
-    title: "Payment:",
-    description: "Lorem ipsum dolor sit amet.",
-  },
-  {
-    title: "Warranty:",
-    description: "Lorem ipsum dolor sit amet.",
-  },
-  {
-    title: "Liability:",
-    description: "Lorem ipsum dolor sit amet.",
-  },
-  {
-    title: "Disclaimer:",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam numquam, quae totam tempore quibusdam minus vitae dolorem. Tempora, illo dolorem.",
-  },
-];
+
 
 const TermsAndConditions = () => {
   return (

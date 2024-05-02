@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
-import { checkoutSchema } from "../page";
+import { checkoutSchema } from "@/lib/schema";
 import { Label } from "@/components/ui/label";
 import Error from "@/components/Error";
 import { cn } from "@/lib/utils";

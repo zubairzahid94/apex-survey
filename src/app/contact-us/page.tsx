@@ -3,23 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { ProblemForm } from "./components/ProblemForm";
 
-const contactInformation = [
-  {
-    type: "Client Support",
-    icon: "/icons/phone.svg",
-    details: "123-456-7890",
-  },
-  {
-    type: "Email",
-    icon: "/icons/mail.svg",
-    details: "XsDfA@example.com",
-  },
-  {
-    type: "Main Office",
-    icon: "/icons/mail.svg",
-    details: "123 Street, City, State, Zip",
-  },
-];
+import { contactInformation } from "@/lib/constants";
 
 const ContactUs = () => {
   return (

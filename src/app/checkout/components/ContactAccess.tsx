@@ -9,7 +9,7 @@ import {
 import { ChevronDown, CircleAlert } from "lucide-react";
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
-import { checkoutSchema } from "../page";
+import { checkoutSchema } from "@/lib/schema";
 import { z } from "zod";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";

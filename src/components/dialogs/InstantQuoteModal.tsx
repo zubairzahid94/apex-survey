@@ -17,6 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Checkbox } from "../ui/checkbox";
 import { Building, HomeIcon } from "lucide-react";
 import Counter from "../Counter";
+import { InstantQuoteSchema } from "@/lib/schema";
 
 export const propertyType = [
   {
@@ -91,31 +92,6 @@ export const bedroomOptions = [
     label: "5+ Bedrooms",
   },
 ];
-
-export const InstantQuoteSchema = z.object({
-  propertyType: z
-    .string({
-      required_error: "Please select a property type",
-    })
-    .min(1, {
-      message: "Please select a property type",
-    }),
-  services: z.array(z.string()).min(1, {
-    message: "Please select at least one service",
-  }),
-  property: z.string().min(1, {
-    message: "Please select a property",
-  }),
-  noOfBedrooms: z.string().min(1, {
-    message: "Please select number of bedrooms",
-  }),
-  noOfFuseBoxes: z.number().min(1, {
-    message: "Atleast one fuse box is required",
-  }),
-  postCode: z.string().min(1, {
-    message: "Please enter your postcode",
-  }),
-});
 
 const InstantQuoteModal = () => {
   const [open, setOpen] = React.useState(false);

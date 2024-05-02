@@ -3,7 +3,6 @@
 import Counter from "@/components/Counter";
 import {
   bedroomOptions,
-  InstantQuoteSchema,
   properties,
   propertyType,
   services,
@@ -12,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { InstantQuoteSchema } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import React from "react";

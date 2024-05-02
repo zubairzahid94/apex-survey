@@ -18,6 +18,7 @@ import {
 // import { toast } from "@/components/ui/use-toast";
 import { ArrowRightIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { FormSchema } from "@/lib/schema";
 
 const items = [
   {
@@ -46,11 +47,7 @@ const items = [
   },
 ] as const;
 
-const FormSchema = z.object({
-  items: z.array(z.string()).refine((value) => value.some((item) => item), {
-    message: "You have to select at least one item.",
-  }),
-});
+
 
 export function ProblemForm() {
   const form = useForm<z.infer<typeof FormSchema>>({
