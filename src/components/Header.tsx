@@ -131,9 +131,20 @@ const Header = () => {
           </DropdownMenu>
         </div>
         <div className="flex w-max gap-4 items-center">
-          <Image src={"/icons/cart.svg"} alt={"Cart"} width={20} height={20} />
+          <Link
+            href={"/checkout"}
+            className="p-2 flex items-center justify-center"
+          >
+            <Image
+              src={"/icons/cart.svg"}
+              alt={"Cart"}
+              width={20}
+              height={20}
+              className="object-cover size-full"
+            />
+          </Link>
           <Button
-            className="bg-apex-blue rounded-sm"
+            className="bg-apex-blue rounded-sm hover:bg-apex-blue active:bg-apex-blue"
             size="sm"
             variant="secondary"
           >

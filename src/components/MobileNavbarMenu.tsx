@@ -38,8 +38,8 @@ const MobileNavbarMenu = ({
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button
-          variant="default"
-          className="bg-transparent inline-block lg:hidden items-center justify-center active:bg-transparent"
+          variant="secondary"
+          className="bg-transparent inline-block lg:hidden items-center justify-center active:bg-transparent hover:bg-transparent"
           size="icon"
         >
           <Image
