@@ -38,7 +38,7 @@ const EmailNewsLetter = () => {
         />
         <Button
           type="submit"
-          className="text-white bg-apex-dark px-6 py-2 flex-[0.5] w-full lg:w-auto"
+          className="text-white bg-apex-dark px-6 py-2 flex-[0.5] w-max self-start"
         >
           Subscribe
         </Button>
