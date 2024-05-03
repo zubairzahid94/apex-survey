@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import { navLinks } from "./Header";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import { navLinks } from "@/lib/constants";
 
 const Navbar = () => {
   const pathname = usePathname();

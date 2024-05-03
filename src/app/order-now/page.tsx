@@ -1,16 +1,12 @@
 "use client";
 
 import Counter from "@/components/Counter";
-import {
-  bedroomOptions,
-  properties,
-  propertyType,
-  services,
-} from "@/components/dialogs/InstantQuoteModal";
+import { propertyType } from "@/components/dialogs/InstantQuoteModal";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { bedroomOptions, properties, services } from "@/lib/constants";
 import { InstantQuoteSchema } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";

@@ -1,5 +1,5 @@
 import Banner from "@/components/Banner";
-import { serviceSteps } from "@/components/ServiceProcedure";
+import { serviceSteps } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";

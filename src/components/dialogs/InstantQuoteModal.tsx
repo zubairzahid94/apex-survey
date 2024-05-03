@@ -18,6 +18,7 @@ import { Checkbox } from "../ui/checkbox";
 import { Building, HomeIcon } from "lucide-react";
 import Counter from "../Counter";
 import { InstantQuoteSchema } from "@/lib/schema";
+import { bedroomOptions, properties, services } from "@/lib/constants";
 
 export const propertyType = [
   {
@@ -29,67 +30,6 @@ export const propertyType = [
     id: "commercial",
     label: "Commercial",
     icon: <Building className="size-8" />,
-  },
-];
-
-export const services = [
-  {
-    id: "gas-safety-service",
-    label: "Gas Safety Service",
-  },
-  {
-    id: "electrical-maintenance",
-    label: "Electrical Maintenance",
-  },
-  {
-    id: "electrical-ppm",
-    label: "Electrical PPM",
-  },
-  {
-    id: "building-survey-report",
-    label: "Building Survey Report",
-  },
-  {
-    id: "digital-mapping-report",
-    label: "Digital Mapping Report",
-  },
-];
-
-export const properties = [
-  {
-    id: "mid-terraced-house",
-    label: "Mid Terraced House",
-  },
-  {
-    id: "detached-house",
-    label: "Detached House",
-  },
-  {
-    id: "townhouse",
-    label: "Townhouse",
-  },
-  {
-    id: "flat",
-    label: "Flat",
-  },
-];
-
-export const bedroomOptions = [
-  {
-    id: "1",
-    label: "Single Bedroom",
-  },
-  {
-    id: "2",
-    label: "2 Bedrooms",
-  },
-  {
-    id: "3",
-    label: "3 Bedrooms",
-  },
-  {
-    id: "5+",
-    label: "5+ Bedrooms",
   },
 ];
 

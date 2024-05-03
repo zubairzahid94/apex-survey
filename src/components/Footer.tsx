@@ -1,58 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { navLinks } from "./Header";
+import { usefulLinks, socialLinks, footerNavLinks } from "@/lib/constants";
 
 export default function Footer() {
-  const socialLinks = [
-    {
-      name: "Facebook",
-      path: "https://www.facebook.com/",
-      iconPath: "/icons/facebook.svg",
-    },
-    {
-      name: "Mail",
-      path: "https://twitter.com/",
-      iconPath: "/icons/mail.svg",
-    },
-    {
-      name: "Instagram",
-      path: "https://www.instagram.com/",
-      iconPath: "/icons/instagram.svg",
-    },
-    {
-      name: "LinkedIn",
-      path: "https://www.linkedin.com/",
-      iconPath: "/icons/linkedin.svg",
-    },
-  ];
-
-  const footerNavLinks = [
-    ...navLinks,
-    {
-      name: "Our Services",
-      path: "/our-services",
-    },
-  ];
-
-  const usefulLinks = [
-    {
-      name: "How it Works",
-      path: "/how-it-works",
-    },
-    {
-      name: "Who need Electrical Installation Report",
-      path: "/electrical-installation-report",
-    },
-    {
-      name: "Who need Energy Performance Certificate",
-      path: "/energy-performance-certificate",
-    },
-    {
-      name: "Terms and Conditions",
-      path: "/terms-and-conditions",
-    },
-  ];
-
   return (
     <footer className="bg-apex-dark flex flex-col gap-12 w-full px-8 py-3 md:px-16 md:py-6">
       <div className="flex flex-col lg:flex-row justify-between gap-y-6">
@@ -85,9 +35,7 @@ export default function Footer() {
             <div className="flex flex-col gap-4">
               {usefulLinks.map((link) => (
                 <Link href={link.path} key={link.path}>
-                  <p className="text-para text-white lg:w-fit">
-                    {link.name}
-                  </p>
+                  <p className="text-para text-white lg:w-fit">{link.name}</p>
                 </Link>
               ))}
             </div>

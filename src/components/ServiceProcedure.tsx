@@ -1,35 +1,9 @@
 "use client";
 
+import { serviceSteps } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-
-export const serviceSteps = [
-  {
-    icon: "/icons/cart.svg",
-    heading: "Place Order Online",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis dolore ducimus quidem doloremque vel quisquam possimus aliquid obcaecati enim, assumenda modi quod atque maxime laborum!",
-  },
-  {
-    icon: "/icons/clipboard-check.svg",
-    heading: "Survey Booked",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis dolore ducimus quidem doloremque vel quisquam possimus aliquid obcaecati enim, assumenda modi quod atque maxime laborum!",
-  },
-  {
-    icon: "/icons/search.svg",
-    heading: "Start Land Survey",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis dolore ducimus quidem doloremque vel quisquam possimus aliquid obcaecati enim, assumenda modi quod atque maxime laborum!",
-  },
-  {
-    icon: "/icons/certificate.svg",
-    heading: "Certificate Issued",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis dolore ducimus quidem doloremque vel quisquam possimus aliquid obcaecati enim, assumenda modi quod atque maxime laborum!",
-  },
-];
 
 const ServiceProcedure = () => {
   const [containerScrollPercentage, setContainerScrollPercentage] = useState(0);

@@ -9,65 +9,11 @@ import {
 } from "./ui/dropdown-menu";
 import Navbar from "./Navbar";
 import MobileNavbarMenu from "./MobileNavbarMenu";
+import { contactLinks, navLinks, servicesDropdownLinks } from "@/lib/constants";
 
-export const navLinks = [
-  {
-    name: "Home",
-    path: "/",
-  },
-  {
-    name: "Contact US",
-    path: "/contact-us",
-  },
-  {
-    name: "FAQ",
-    path: "/faqs",
-  },
-];
 
-export const servicesDropdownLinks = [
-  {
-    name: "Electrical Maintenance/PPM",
-    path: "/services/electrical-maintenance",
-  },
-  {
-    name: "Energy Performance Certificate",
-    path: "/services/energy-performance-certificate",
-  },
-  {
-    name: "Gas Safety Certificate",
-    path: "/services/gas-safety-certificate",
-  },
-  {
-    name: "Fire Alarm Test Report",
-    path: "/services/fire-alarm-test-report",
-  },
-  {
-    name: "Electrical Installation Report",
-    path: "/services/electrical-installation-report",
-  },
-  {
-    name: "Building Survey Report",
-    path: "/services/building-survey-report",
-  },
-  {
-    name: "Fire Risk Assesment",
-    path: "/services/fire-risk-assesment",
-  },
-];
 const Header = () => {
-  const contactLinks = [
-    {
-      web_link: "info@apexsurveyors.org.pk",
-      web_text: "info@apexsurveyors.org.pk",
-      web_iconPath: "/icons/web.svg",
-    },
-    {
-      phone_link: "0800 048 7474",
-      phone_text: "Call Us Free: +0800 048 7474",
-      phone_iconPath: "/icons/phone.svg",
-    },
-  ];
+  
 
   return (
     <header className="flex flex-col w-full">
