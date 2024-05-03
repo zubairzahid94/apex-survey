@@ -1,6 +1,8 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export const serviceSteps = [
   {
@@ -30,6 +32,23 @@ export const serviceSteps = [
 ];
 
 const ServiceProcedure = () => {
+  const [containerScrollPercentage, setContainerScrollPercentage] = useState(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!scrollContainerRef.current) return;
+    const container = scrollContainerRef.current;
+    const handleScroll = () => {
+      const { scrollLeft, scrollWidth, clientWidth } = container;
+      const scrollPercentage = (scrollLeft / (scrollWidth - clientWidth)) * 100;
+      setContainerScrollPercentage(scrollPercentage);
+    };
+    container.addEventListener("scroll", handleScroll);
+    return () => {
+      container.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <section className="px-7 lg:px-11 flex flex-col gap-6 mb-20">
       <div className="w-full lg:w-4/6 space-y-2 flex flex-col items-center justify-center self-center">
@@ -40,11 +59,14 @@ const ServiceProcedure = () => {
           deserunt nam?
         </p>
       </div>
-      <div className="flex flex-row gap-y-24 gap-x-4 items-center justify-between">
+      <div
+        className="flex overflow-x-scroll scroll-smooth flex-row gap-y-24 gap-x-4 items-center justify-between no-scrollbar"
+        ref={scrollContainerRef}
+      >
         {serviceSteps.map((step, index) => (
           <div
             key={index}
-            className="w-full lg:w-1/4 flex flex-col items-center gap-4 p-4 relative"
+            className="w-full min-w-[225px] lg:w-1/4 flex flex-col items-center gap-4 p-4 relative"
           >
             <div
               className={cn(
@@ -77,6 +99,44 @@ const ServiceProcedure = () => {
             )}
           </div>
         ))}
+      </div>
+      <div className="flex lg:hidden w-full justify-center gap-3 items-center">
+        <span
+          onClick={() => {
+            if (!scrollContainerRef.current) return;
+            scrollContainerRef.current.scrollLeft = 0;
+          }}
+          className={cn(
+            "w-3 h-3 bg-gray-200 rounded-full",
+            containerScrollPercentage >= 0 &&
+              containerScrollPercentage < 33 &&
+              "bg-apex-blue"
+          )}
+        />
+        <span
+          onClick={() => {
+            if (!scrollContainerRef.current) return;
+            scrollContainerRef.current.scrollLeft =
+              scrollContainerRef.current.scrollWidth / 4;
+          }}
+          className={cn(
+            "w-3 h-3 bg-gray-200 rounded-full",
+            containerScrollPercentage >= 33 &&
+              containerScrollPercentage < 66 &&
+              "bg-apex-blue"
+          )}
+        />
+        <span
+          onClick={() => {
+            if (!scrollContainerRef.current) return;
+            scrollContainerRef.current.scrollLeft =
+              scrollContainerRef.current.scrollWidth;
+          }}
+          className={cn(
+            "w-3 h-3 bg-gray-200 rounded-full",
+            containerScrollPercentage >= 66 && "bg-apex-blue"
+          )}
+        />
       </div>
     </section>
   );
