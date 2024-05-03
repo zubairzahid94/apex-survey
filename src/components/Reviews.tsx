@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 
 const Reviews = () => {
   return (
-    <section className="px-6 flex flex-col gap-8">
+    <section className="px-7 lg:px-11 flex flex-col gap-8">
       <div className="space-y-2 w-full md:w-1/2 mx-auto">
         <h3 className="text-h3 text-center w-full">What Our Customer Says</h3>
         <p className="text-small text-center">
@@ -20,13 +20,24 @@ const Reviews = () => {
           nearly 40 years we have been Making Buildings Better.
         </p>
       </div>
-      <div className="flex flex-col md:flex-row gap-2 min-h-96">
-        {new Array<number>(4).fill(0).map((_, index) => (
-          <ReviewCard
-            key={index}
-            className={index % 2 == 0 ? "self-start" : "self-end"}
-          />
-        ))}
+
+      <div className="flex flex-row gap-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 grid-row min-h-96 mb-12 lg:mb-0">
+          {new Array<number>(2).fill(0).map((_, index) => (
+            <ReviewCard
+              key={index}
+              className={index % 2 == 0 ? "self-start" : "self-end"}
+            />
+          ))}
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 mt-12 lg:mt-0 gap-2 grid-row min-h-96">
+          {new Array<number>(2).fill(0).map((_, index) => (
+            <ReviewCard
+              key={index}
+              className={index % 2 == 0 ? "self-start" : "self-end"}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -37,7 +48,7 @@ export default Reviews;
 export const ReviewCard = ({ className }: { className?: string }) => {
   return (
     <Card className={cn("p-0 shadow-lg border-0", className)}>
-      <CardHeader>
+      <CardHeader className="p-3 lg:p-6">
         <div className="size-14 flex items-center justify-center">
           <Image
             src={"/Review-card.png"}
@@ -56,15 +67,17 @@ export const ReviewCard = ({ className }: { className?: string }) => {
           className="object-contain size-fit"
         />
       </CardHeader>
-      <CardContent>
+      <CardContent className="p-3 lg:p-6">
         <p className="text-small text-apex-grey-dark">
           “Lorem ipsum dolor sit amet consectetur. Iaculis in ut porttitor
           vivamus et. Quis sem sit posuere egestas amet.
         </p>
       </CardContent>
-      <CardFooter className="flex flex-row gap-2 items-center justify-between w-full">
-        <p className="text-small">{new Date().toLocaleDateString()}</p>
-        <div className="flex flex-row gap-2 items-center">
+      <CardFooter className="flex flex-col sm:flex-row gap-2 items-center justify-between w-full p-3 lg:p-6 pt-0">
+        <p className="text-small self-start">
+          {new Date().toLocaleDateString()}
+        </p>
+        <div className="flex flex-row gap-2 items-center self-end">
           <Image
             src={"/icons/check-icon.svg"}
             alt={"Check Icon"}

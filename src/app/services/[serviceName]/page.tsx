@@ -5,6 +5,7 @@ import { PricingCard } from "@/components/PricingCard";
 import Reviews from "@/components/Reviews";
 import ServiceProcedure from "@/components/ServiceProcedure";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import React from "react";
 
 type ElectricalMaintenanceProps = {
@@ -15,6 +16,9 @@ type ElectricalMaintenanceProps = {
 
 const ElectricalMaintenance = ({ params }: ElectricalMaintenanceProps) => {
   console.log(params);
+
+  if (params.serviceName !== "electrical-maintenance") return notFound();
+
   return (
     <>
       <Banner
@@ -29,8 +33,8 @@ const ElectricalMaintenance = ({ params }: ElectricalMaintenanceProps) => {
         </h2>
       </Banner>
       <section className="w-full flex flex-col gap-10">
-        <div className="my-8 px-6 w-full h-auto flex flex-col md:flex-row gap-4 justify-between">
-          <div className="w-full md:w-1/2 flex flex-col gap-4 justify-center">
+        <div className="my-8 px-7 lg:px-11 w-full h-auto flex flex-col lg:flex-row gap-4 justify-between">
+          <div className="w-full lg:w-1/2 flex flex-col gap-4 justify-center">
             <div className="space-y-6">
               <h4 className="text-h4">Electrical Maintenance/PPM</h4>
               <p className="text-para">
@@ -45,7 +49,7 @@ const ElectricalMaintenance = ({ params }: ElectricalMaintenanceProps) => {
             </div>
             <InstantQuoteModal />
           </div>
-          <div className="w-full md:w-1/2 flex items-center justify-center">
+          <div className="w-full lg:w-1/2 order-first lg:order-last flex items-center justify-center">
             <Image
               src={"/electrical-ppm-image.png"}
               alt="Electrical PPM"
@@ -56,7 +60,7 @@ const ElectricalMaintenance = ({ params }: ElectricalMaintenanceProps) => {
             />
           </div>
         </div>
-        <div className="px-6 flex flex-col gap-4 mb-4">
+        <div className="px-7 lg:px-11 flex flex-col gap-4 mb-4">
           <div>
             <p className="text-para">Pricing</p>
             <h3 className="text-h3">Prices of Services We Offer</h3>

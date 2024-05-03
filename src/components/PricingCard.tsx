@@ -12,11 +12,11 @@ const perks = [
 
 export function PricingCard() {
   return (
-    <Card className="w-[48%] lg:w-80 h-auto px-3 mx-auto lg:border-apex-grey-dark lg:border-t-apex-grey-light lg:border-t-[24px] rounded-xl">
-      <CardHeader className="text-center lg:border-t-apex-dark">
+    <Card className="w-[48%] lg:w-[24%] h-auto p-3 mx-auto lg:border-apex-grey-dark lg:border-t-apex-grey-light lg:border-t-[24px] rounded-xl">
+      <CardHeader className="text-center lg:border-t-apex-dark !p-0">
         <h3 className="text-2xl font-bold">Starter Plan</h3>
       </CardHeader>
-      <CardContent className="space-y-6 p-3 lg:p-6">
+      <CardContent className="space-y-6 !p-0">
         <div className="text-center">
           <sup className="text-xs font-bold">$</sup>
           <span className="text-h4">129</span>

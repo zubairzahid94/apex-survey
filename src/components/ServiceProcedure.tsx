@@ -31,7 +31,7 @@ export const serviceSteps = [
 
 const ServiceProcedure = () => {
   return (
-    <section className="px-6 flex flex-col gap-6 mb-20">
+    <section className="px-7 lg:px-11 flex flex-col gap-6 mb-20">
       <div className="w-full md:w-4/6 space-y-2 flex flex-col items-center justify-center self-center">
         <h3 className="text-h3 text-center">Four Steps to Get Our Services</h3>
         <p className="text-para text-center">

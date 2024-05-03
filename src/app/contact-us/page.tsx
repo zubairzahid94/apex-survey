@@ -12,8 +12,8 @@ const ContactUs = () => {
         <p className="text-para text-white">Contact Us</p>
         <h5 className="text-h5 text-white">For Any Queries</h5>
       </Banner>
-      <section className="flex flex-col md:flex-row items-center m-10 min-h-screen">
-        <div className="w-full h-full md:w-1/2 bg-apex-blue px-5 py-10 flex flex-col items-center justify-center gap-4 rounded-t-xl rounded-b-none md:rounded-l-xl md:rounded-r-none shadow-lg">
+      <section className="flex flex-col gap-5 lg:gap-0 lg:flex-row items-center mx-9 lg:mx-11 mt-10 mb-20">
+        <div className="w-full h-full lg:min-h-[520px] lg:w-1/2 bg-apex-blue px-8 py-10 flex flex-col items-center justify-center gap-4 rounded-xl lg:rounded-l-xl lg:rounded-r-none shadow-lg">
           <h4 className="text-h4 text-white">Contact Us</h4>
           <div className="flex flex-col gap-4 w-full md:w-max">
             {contactInformation.map((info, index) => (
@@ -36,7 +36,7 @@ const ContactUs = () => {
             ))}
           </div>
         </div>
-        <div className="w-full md:w-1/2 p-10 flex items-center justify-center rounded-b-xl rounded-t-none md:rounded-r-xl md:rounded-l-none border border-b border-t-0 md:border-r md:border-l-0 border-gray-50 shadow-lg h-full">
+        <div className="w-full lg:min-h-[520px] lg:w-1/2 p-10 flex items-center justify-center rounded-xl lg:rounded-r-xl lg:rounded-l-none border border-b border-t-0 lg:border-r lg:border-l-0 border-gray-50 shadow-lg h-full p-auto">
           <ProblemForm />
         </div>
       </section>

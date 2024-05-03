@@ -23,12 +23,12 @@ export const propertyType = [
   {
     id: "residential",
     label: "Residential",
-    icon: <HomeIcon className="w-4 h-4" />,
+    icon: <HomeIcon className="size-8" />,
   },
   {
     id: "commercial",
     label: "Commercial",
-    icon: <Building className="w-4 h-4" />,
+    icon: <Building className="size-8" />,
   },
 ];
 

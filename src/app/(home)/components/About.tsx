@@ -3,8 +3,8 @@ import React from "react";
 
 const About = () => {
   return (
-    <section className="px-6 flex flex-col md:justify-between md:flex-row gap-4 my-10">
-      <div className="w-full md:w-[45%] flex items-center justify-center">
+    <section className="px-7 lg:px-11 flex flex-col lg:justify-between lg:flex-row gap-4 my-10">
+      <div className="w-full lg:w-[45%] flex items-center justify-center">
         <Image
           src={"/About-us-image.png"}
           alt={"About Us Image"}
@@ -14,7 +14,7 @@ const About = () => {
           className={"object-cover size-full"}
         />
       </div>
-      <div className="w-full md:w-[45%] flex flex-col gap-8">
+      <div className="w-full lg:w-[45%] flex flex-col gap-8">
         <div className="space-y-4">
           <div className="flex flex-col gap-2">
             <p className="text-para text-apex-blue">ABOUT APEX SURVEY</p>

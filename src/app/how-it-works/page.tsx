@@ -14,7 +14,7 @@ const HowItWorks = () => {
         </Link>
         <h5 className="text-h5 text-white">How it Works</h5>
       </Banner>
-      <section className="flex flex-col gap-8 px-6 my-10">
+      <section className="flex flex-col gap-8 lg:px-11 px-7 my-10">
         {serviceSteps.map((step, index) => (
           <div key={index} className="w-full flex gap-8 p-4 relative">
             <div

@@ -3,8 +3,6 @@ import { termsAndConditions } from "@/lib/constants";
 import Link from "next/link";
 import React from "react";
 
-
-
 const TermsAndConditions = () => {
   return (
     <>
@@ -14,7 +12,7 @@ const TermsAndConditions = () => {
         </Link>
         <h5 className="text-h5 text-white">Terms & Conditions</h5>
       </Banner>
-      <section className="flex flex-col gap-10 items-center px-6 my-10 w-full md:w-9/12 mx-auto">
+      <section className="flex flex-col gap-10 items-center lg:px-11 px-7 my-10 w-full lg:w-9/12 mx-auto">
         <div className="w-full md:w-1/2 space-y-2">
           <h5 className="text-btn text-center">Terms and Conditions</h5>
           <p className="text-para text-center">

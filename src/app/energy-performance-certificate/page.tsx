@@ -13,7 +13,7 @@ const EnergyPerformanceCertificate = () => {
           Who Need Energy Performance Certificate
         </h5>
       </Banner>
-      <section className="flex flex-col gap-8 my-20 min-h-80 items-center w-full md:w-[80%] mx-auto">
+      <section className="flex flex-col gap-8 my-20 min-h-80 items-center w-full lg:w-[80%] mx-auto px-7 lg:px-11">
         <div className="flex flex-col gap-4">
           <h5 className="text-h5">Who Need Energy Performance Certificate</h5>
           <p className="text-para">

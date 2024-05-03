@@ -18,6 +18,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+//TODO: This page is having a lot of repeated code from the instant Quote Modal. So try to reuse that code instead of just copying pasting it here
+
 const OrderNow = () => {
   const router = useRouter();
 
@@ -38,7 +40,7 @@ const OrderNow = () => {
   return (
     <form
       onSubmit={form.handleSubmit(onSubmit)}
-      className="space-y-8 w-1/2 mx-auto my-8"
+      className="space-y-8 lg:px-11 px-7 w-full sm:w-3/4 lg:w-1/2 mx-auto my-8"
     >
       <div className="w-full flex flex-col gap-4">
         <Label htmlFor="propertyType" className="!text-h5 text-center">
@@ -70,7 +72,7 @@ const OrderNow = () => {
                 htmlFor={item.id}
               >
                 {item.icon}
-                <h5 className="text-h5 font-bold">{item.label}</h5>
+                <h5 className="text-para sm:text-h5 font-bold">{item.label}</h5>
                 <p className="text-small">
                   Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                   Quidem aut incidunt officiis ipsum pariatur nihil delectus

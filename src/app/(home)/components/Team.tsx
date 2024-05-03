@@ -31,7 +31,7 @@ const teamCards = [
 
 const Team = () => {
   return (
-    <section className="px-6 flex flex-col gap-6">
+    <section className="px-7 lg:px-11 flex flex-col gap-6">
       <div className="space-y-2 w-full md:w-1/2">
         <h3 className="text-h3">Meat the Team</h3>
         <p className="text-small font-medium">
@@ -40,11 +40,11 @@ const Team = () => {
           nearly 40 years we have been Making Buildings Better.
         </p>
       </div>
-      <div className="flex flex-col flex-wrap justify-between md:flex-row gap-3 w-full">
+      <div className="flex flex-wrap flex-row gap-x-2 gap-y-4">
         {teamCards.map((member, index) => (
           <article
             key={index}
-            className="flex flex-col items-center gap-4 w-full md:w-[220px]"
+            className="w-[48%] lg:w-[18%] h-auto mx-auto flex flex-col items-center"
           >
             <Image
               src={member.image}
@@ -56,7 +56,7 @@ const Team = () => {
             />
             <div className="flex flex-col items-center w-max gap-2">
               <h5 className="text-btn">{member.name}</h5>
-              <p className="text-small font-medium">{member.position}</p>
+              <p className="text-small font-medium text-wrap w-[70%] text-center">{member.position}</p>
             </div>
           </article>
         ))}

@@ -119,12 +119,12 @@ const Header = () => {
                 height={12}
               />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="rounded-sm min-w-80 flex gap-2 flex-col p-2">
+            <DropdownMenuContent className="rounded-sm w-max flex gap-2 flex-col">
               {servicesDropdownLinks.map((link) => (
-                <Link href={link.path} key={link.path}>
-                  <DropdownMenuItem className="hover:bg-apex-blue hover:text-white cursor-pointer">
+                <Link href={link.path} key={link.path} className="hover:bg-apex-blue hover:text-white py-2 px-4">
+                  <div className="hover:bg-apex-blue hover:text-white cursor-pointer">
                     {link.name}
-                  </DropdownMenuItem>
+                  </div>
                 </Link>
               ))}
             </DropdownMenuContent>

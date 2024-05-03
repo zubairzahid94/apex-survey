@@ -30,7 +30,7 @@ const serviceCards = [
 
 const Services = () => {
   return (
-    <section className="px-6 flex flex-col gap-4 mb-auto lg:mb-20">
+    <section className="px-7 lg:px-11 flex flex-col gap-4 mb-auto lg:mb-20">
       <div className="space-y-1">
         <p className="text-para">Popular Services</p>
         <h3 className="text-h4 lg:text-h3">What Services We Offer</h3>
@@ -51,7 +51,7 @@ const Services = () => {
               />
             </div>
             <div className="bg-black p-2 lg:p-4 lg:pb-5 absolute -bottom-10 lg:-bottom-20 w-[90%] mx-auto h-max lg:min-h-36 flex flex-col items-center gap-2">
-              <h5 className="text-small truncate font-semibold lg:text-btn text-center text-white">
+              <h5 className="text-small text-wrap sm:w-full w-[85%] font-semibold lg:text-btn text-center text-white">
                 {card.title}
               </h5>
               <p className="text-caption lg:text-small text-white">

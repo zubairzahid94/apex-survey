@@ -17,8 +17,6 @@ import { cn } from "@/lib/utils";
 import ContactAccess from "./components/ContactAccess";
 import { checkoutSchema } from "@/lib/schema";
 
-
-
 const Checkout = () => {
   const form = useForm<z.infer<typeof checkoutSchema>>({
     resolver: zodResolver(checkoutSchema),
@@ -36,12 +34,13 @@ const Checkout = () => {
   const submitHandler = (data: z.infer<typeof checkoutSchema>) => {
     console.log(data);
     alert(JSON.stringify(data, null, 2));
+    form.reset();
   };
 
   return (
-    <div className="px-6 py-4">
+    <div className="lg:px-11 px-7 py-4">
       <h5 className="text-h5">Check out</h5>
-      <section className="w-2/3 my-8 mx-auto flex flex-col gap-4">
+      <section className="w-full lg:w-2/3 my-8 mx-auto flex flex-col gap-4">
         <Heading
           primaryHeading="Your Property and Services"
           secondaryHeading="Price"
@@ -49,7 +48,7 @@ const Checkout = () => {
         <div className="flex flex-col gap-4 py-2 px-4 bg-gray-200">
           <div className="flex flex-row items-center justify-between">
             <p className="text-para">your@gmail.com</p>
-            <Button className="text-btn p-2 text-white bg-apex-blue">
+            <Button className="text-btn p-2 text-white bg-apex-blue hover:bg-apex-blue">
               Change Service
             </Button>
           </div>
@@ -98,9 +97,9 @@ const Checkout = () => {
         <Heading primaryHeading="Client Details" />
         <form
           onSubmit={form.handleSubmit(submitHandler)}
-          className="w-full flex gap-4"
+          className="w-full flex lg:flex-row flex-col gap-4"
         >
-          <fieldset className="w-1/2 flex flex-col gap-4">
+          <fieldset className="w-full lg:w-1/2 flex flex-col gap-4">
             <div className="space-y-2">
               <Label htmlFor="fullName" className="!text-para">
                 Full Name
@@ -182,7 +181,7 @@ const Checkout = () => {
               )}
             </div>
           </fieldset>
-          <fieldset className="w-1/2 flex flex-col gap-4">
+          <fieldset className="w-full lg:w-1/2 flex flex-col gap-4">
             {paymentMethod === "card" ? (
               <CardInfoForm form={form} />
             ) : (

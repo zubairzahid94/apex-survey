@@ -58,7 +58,7 @@ const ContactAccess = ({ form }: ContactAccessProps) => {
               setContactType(e);
               form.setValue("contactAccess.type", e);
             }}
-            className="w-full flex justify-between items-center"
+            className="w-full flex flex-wrap gap-4 lg:justify-between items-center"
           >
             {radioOptions.map((option) => (
               <div key={option} className="flex items-center space-x-2">
@@ -74,8 +74,8 @@ const ContactAccess = ({ form }: ContactAccessProps) => {
             ))}
           </RadioGroup>
           {contactType !== "me" ? (
-            <section className="flex flex-row gap-3">
-              <div className="w-1/2 flex flex-col gap-4">
+            <section className="flex flex-col lg:flex-row gap-3">
+              <div className="w-full lg:w-1/2 flex flex-col gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="name">{`${form.getValues(
                     "contactAccess.type"
@@ -92,7 +92,7 @@ const ContactAccess = ({ form }: ContactAccessProps) => {
                   />
                 </div>
               </div>
-              <div className="w-1/2 flex flex-col gap-4">
+              <div className="w-full lg:w-1/2 flex flex-col gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="email">{`${form.getValues(
                     "contactAccess.type"
