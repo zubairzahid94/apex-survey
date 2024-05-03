@@ -32,7 +32,7 @@ export const serviceSteps = [
 const ServiceProcedure = () => {
   return (
     <section className="px-7 lg:px-11 flex flex-col gap-6 mb-20">
-      <div className="w-full md:w-4/6 space-y-2 flex flex-col items-center justify-center self-center">
+      <div className="w-full lg:w-4/6 space-y-2 flex flex-col items-center justify-center self-center">
         <h3 className="text-h3 text-center">Four Steps to Get Our Services</h3>
         <p className="text-para text-center">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis
@@ -40,11 +40,11 @@ const ServiceProcedure = () => {
           deserunt nam?
         </p>
       </div>
-      <div className="flex flex-col lg:flex-row gap-y-24 gap-x-4 items-center justify-between">
+      <div className="flex flex-row gap-y-24 gap-x-4 items-center justify-between">
         {serviceSteps.map((step, index) => (
           <div
             key={index}
-            className="w-full md:w-1/4 flex flex-col items-center gap-4 p-4 relative"
+            className="w-full lg:w-1/4 flex flex-col items-center gap-4 p-4 relative"
           >
             <div
               className={cn(
@@ -65,13 +65,13 @@ const ServiceProcedure = () => {
             {/*Write logic So that If index becomes equal to the length, then donot show arrow for that iteration and forward. */}
 
             {index < serviceSteps.length - 1 && (
-              <div className="absolute -bottom-24 right-1/3 lg:top-0 lg:-right-10 size-24">
+              <div className="absolute top-0 -right-10 size-24">
                 <Image
                   src={"/icons/curvy-arrow.svg"}
                   alt="Curvy Arrow"
                   width={50}
                   height={50}
-                  className="object-contain size-full rotate-90 lg:rotate-0"
+                  className="object-contain size-full rotate-0"
                 />
               </div>
             )}
