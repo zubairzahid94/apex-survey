@@ -19,7 +19,7 @@ const ContactUs = () => {
             {contactInformation.map((info, index) => (
               <div
                 key={index}
-                className="flex flex-col gap-2 border-b border-b-white py-2"
+                className="flex text-white flex-col gap-2 border-b border-b-white py-2"
               >
                 <p className="text-btn text-white">{info.type}</p>
                 <div className="flex items-center gap-2">
@@ -28,6 +28,7 @@ const ContactUs = () => {
                     alt={info.type}
                     width={14}
                     height={14}
+                    style={{ color: "white" }}
                     className="object-contain size-fit text-white"
                   />
                   <p className="text-small text-white">{info.details}</p>
