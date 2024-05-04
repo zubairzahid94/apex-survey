@@ -74,7 +74,8 @@ const config = {
         },
       },
       screens: {
-        xs: "390px",
+        xxs: "390px",
+        xs: "480px",
       },
       backgroundColor: {
         apex: {
