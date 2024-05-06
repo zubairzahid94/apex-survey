@@ -13,7 +13,7 @@ export default async function Home() {
       <Hero />
       <About />
       <Services />
-      <section className="px-7 lg:px-11 flex flex-col gap-4 mb-4">
+      <section className="px-7 lg:px-11 flex flex-col gap-4 mb-4  max-w-screen-xl mx-auto">
         <div className="space-y-1">
           <p className="text-para">Pricing</p>
           <h3 className="text-h3">Prices of Services We Offer</h3>

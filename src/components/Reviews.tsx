@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 
 const Reviews = () => {
   return (
-    <section className="px-7 lg:px-11 flex flex-col gap-8">
+    <section className="px-7 lg:px-11 flex flex-col gap-8  max-w-screen-xl mx-auto">
       <div className="space-y-2 w-full md:w-1/2 mx-auto">
         <h3 className="text-h3 text-center w-full">What Our Customer Says</h3>
         <p className="text-small text-center">

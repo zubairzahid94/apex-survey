@@ -31,7 +31,7 @@ const teamCards = [
 
 const Team = () => {
   return (
-    <section className="px-7 lg:px-11 flex flex-col gap-6">
+    <section className="px-7 lg:px-11 flex flex-col gap-6  max-w-screen-xl mx-auto" >
       <div className="space-y-2 w-full md:w-1/2">
         <h3 className="text-h3">Meat the Team</h3>
         <p className="text-small font-medium">

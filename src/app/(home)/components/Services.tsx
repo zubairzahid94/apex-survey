@@ -30,7 +30,7 @@ const serviceCards = [
 
 const Services = () => {
   return (
-    <section className="px-7 lg:px-11 flex flex-col gap-4 mb-auto lg:mb-20">
+    <section className="px-7 lg:px-10 flex flex-col gap-4 mb-auto lg:mb-20 max-w-screen-xl mx-auto">
       <div className="space-y-1">
         <p className="text-para">Popular Services</p>
         <h3 className="text-h4 lg:text-h3">What Services We Offer</h3>

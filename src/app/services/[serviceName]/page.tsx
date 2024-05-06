@@ -32,7 +32,7 @@ const ElectricalMaintenance = ({ params }: ElectricalMaintenanceProps) => {
             .join(" ")}
         </h2>
       </Banner>
-      <section className="w-full flex flex-col gap-10">
+      <section className="w-full flex flex-col gap-10  max-w-screen-xl mx-auto">
         <div className="my-8 px-7 lg:px-11 w-full h-auto flex flex-col lg:flex-row gap-4 justify-between">
           <div className="w-full lg:w-1/2 flex flex-col gap-4 justify-center">
             <div className="space-y-6">

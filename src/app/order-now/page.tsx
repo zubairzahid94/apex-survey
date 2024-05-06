@@ -36,7 +36,7 @@ const OrderNow = () => {
   return (
     <form
       onSubmit={form.handleSubmit(onSubmit)}
-      className="space-y-8 lg:px-11 px-7 w-full sm:w-3/4 lg:w-1/2 mx-auto my-8"
+      className="space-y-8 lg:px-11 px-7 w-full sm:w-3/4 lg:w-1/2 mx-auto my-8 max-w-screen-md"
     >
       <div className="w-full flex flex-col gap-4">
         <Label htmlFor="propertyType" className="!text-h5 text-center">

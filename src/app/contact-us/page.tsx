@@ -12,7 +12,7 @@ const ContactUs = () => {
         <p className="text-para text-white">Contact Us</p>
         <h5 className="text-h5 text-white">For Any Queries</h5>
       </Banner>
-      <section className="flex flex-col gap-5 lg:gap-0 lg:flex-row items-center mx-9 lg:mx-11 mt-10 mb-20">
+      <section className="flex flex-col gap-5 lg:gap-0 lg:flex-row items-center mx-9 lg:mx-11 mt-10 mb-20 max-w-screen-xl xl:mx-auto">
         <div className="w-full h-full lg:min-h-[520px] lg:w-1/2 bg-apex-blue px-8 py-10 flex flex-col items-center justify-center gap-4 rounded-xl lg:rounded-l-xl lg:rounded-r-none shadow-lg">
           <h4 className="text-h4 text-white">Contact Us</h4>
           <div className="flex flex-col gap-4 w-full md:w-max">

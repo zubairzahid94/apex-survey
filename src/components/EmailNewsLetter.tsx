@@ -13,7 +13,7 @@ const EmailNewsLetter = () => {
   };
 
   return (
-    <div className="px-7 lg:px-11 py-12 flex flex-col lg:flex-row items-center gap-8 bg-apex-blue w-[96%] mx-auto rounded-md mb-20">
+    <div className="px-7 lg:px-11 py-12 flex flex-col lg:flex-row items-center gap-8 bg-apex-blue w-[96%] mx-auto rounded-md mb-20  max-w-screen-xl">
       <div className="w-full lg:w-1/2 flex flex-col gap-2">
         <h5 className="text-btn text-white">
           Subscribe and Get More Information

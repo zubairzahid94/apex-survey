@@ -38,7 +38,7 @@ const Checkout = () => {
   };
 
   return (
-    <div className="lg:px-11 px-7 py-4">
+    <div className="lg:px-11 px-7 py-4  max-w-screen-xl mx-auto">
       <h5 className="text-h5">Check out</h5>
       <section className="w-full lg:w-2/3 my-8 mx-auto flex flex-col gap-4">
         <Heading
