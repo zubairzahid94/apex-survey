@@ -10,7 +10,7 @@ import { bedroomOptions, properties, services } from "@/lib/constants";
 import { InstantQuoteSchema } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -25,6 +25,8 @@ const OrderNow = () => {
       noOfFuseBoxes: 1,
     },
   });
+
+  const [subFields, setSubFields] = useState<string[]>([]);
 
   function onSubmit(data: z.infer<typeof InstantQuoteSchema>) {
     console.log(data);
@@ -56,9 +58,12 @@ const OrderNow = () => {
               checked={form.watch("propertyType") === item.id}
               onCheckedChange={(checked) => {
                 if (checked) {
-                  form.setValue("propertyType", item.id);
-                } else {
-                  form.setValue("propertyType", "");
+                  form.setValue(
+                    "propertyType",
+                    item.id as z.infer<
+                      typeof InstantQuoteSchema
+                    >["propertyType"]
+                  );
                 }
               }}
               className="bg-transparent data-[state=checked]:text-white data-[state=checked]:bg-apex-blue border border-gray-200 flex items-center justify-between p-3 w-1/2"
@@ -88,73 +93,93 @@ const OrderNow = () => {
             {form.getFieldState("services").error?.message}
           </p>
         )}
-        {services.map((item) => (
-          <Checkbox
-            key={item.id}
-            id={item.id}
-            value={item.id}
-            checked={form.watch("services")?.includes(item.id)}
-            onCheckedChange={(checked) => {
-              if (checked) {
-                form.setValue(
-                  "services",
-                  Array.isArray(form.watch("services"))
-                    ? [...form.watch("services"), item.id]
-                    : [item.id]
-                );
-              } else {
-                form.setValue(
-                  "services",
-                  form.watch("services")?.filter((value) => value !== item.id)
-                );
-              }
-            }}
-            className="bg-transparent data-[state=checked]:text-white data-[state=checked]:bg-apex-blue border border-gray-200 flex items-center justify-between p-3"
-          >
-            <Label
-              className="w-full flex flex-row gap-2 items-center"
-              htmlFor={item.id}
-            >
-              <p className="text-small font-medium">{item.label}</p>
-            </Label>
-          </Checkbox>
-        ))}
-      </div>
-      <div className="w-full flex flex-col gap-4">
-        <Label htmlFor="property" className="!text-btn">
-          Property Type:
-        </Label>
-        {form.getFieldState("property").error && (
-          <p className="text-red-500 text-small">
-            {form.getFieldState("property").error?.message}
-          </p>
-        )}
-        {properties.map((item) => (
-          <div key={item.id} className="flex gap-2">
+        {services
+          .filter((service) =>
+            service.servicePropertyType.includes(form.watch("propertyType"))
+          )
+          .map((item) => (
             <Checkbox
               key={item.id}
               id={item.id}
               value={item.id}
-              checked={form.watch("property") === item.id}
+              checked={form.watch("services")?.includes(item.id)}
               onCheckedChange={(checked) => {
                 if (checked) {
-                  form.setValue("property", item.id);
+                  form.setValue(
+                    "services",
+                    Array.isArray(form.watch("services"))
+                      ? [...form.watch("services"), item.id]
+                      : [item.id]
+                  );
+                  setSubFields((prev) => {  
+                    const newFields = item.subFields.filter(
+                      (field) => !prev.includes(field)
+                    );
+
+                    if (newFields.length <= 0) {
+                      return prev;
+                    }
+                    return [...prev, ...newFields];
+                  });
                 } else {
-                  form.setValue("property", "");
+                  form.setValue(
+                    "services",
+                    form.watch("services")?.filter((value) => value !== item.id)
+                  );
+                  //filter out subfields of the current item from subFields array
+                  // setSubFields((prev) => (
+                  //   // I will loop through all of the subfields of my currently selected item. and for each iteration, i will in turn loop through each of the subfields on all previously stored services. If atleast one of my currently selected item's field is such that it is not found in any of the previous services subField, then that field is unique and I will remove that and keep all other.
+                  // ))
                 }
               }}
-              className="bg-transparent data-[state=checked]:text-white data-[state=checked]:bg-apex-blue border border-gray-200 size-4"
-            />
-            <Label
-              className="w-full flex flex-row gap-2 items-center"
-              htmlFor={item.id}
+              className="bg-transparent data-[state=checked]:text-white data-[state=checked]:bg-apex-blue border border-gray-200 flex items-center justify-between p-3"
             >
-              <p className="text-small font-medium">{item.label}</p>
-            </Label>
-          </div>
-        ))}
+              <Label
+                className="w-full flex flex-row gap-2 items-center"
+                htmlFor={item.id}
+              >
+                <p className="text-small font-medium">{item.label}</p>
+              </Label>
+            </Checkbox>
+          ))}
       </div>
-      <div className="w-full flex flex-col gap-4">
+      {subFields.map((item, index) => (
+        <div className="w-full flex flex-col gap-4" key={index}>
+          <Label htmlFor="property" className="!text-btn">
+            Select {item}:
+          </Label>
+          {form.getFieldState("property").error && (
+            <p className="text-red-500 text-small">
+              {form.getFieldState("property").error?.message}
+            </p>
+          )}
+          {properties.map((item) => (
+            <div key={item.id} className="flex gap-2">
+              <Checkbox
+                key={item.id}
+                id={item.id}
+                value={item.id}
+                checked={form.watch("property") === item.id}
+                onCheckedChange={(checked) => {
+                  if (checked) {
+                    form.setValue("property", item.id);
+                  } else {
+                    form.setValue("property", "");
+                  }
+                }}
+                className="bg-transparent data-[state=checked]:text-white data-[state=checked]:bg-apex-blue border border-gray-200 size-4"
+              />
+              <Label
+                className="w-full flex flex-row gap-2 items-center"
+                htmlFor={item.id}
+              >
+                <p className="text-small font-medium">{item.label}</p>
+              </Label>
+            </div>
+          ))}
+        </div>
+      ))}
+      {/*<div className="w-full flex flex-col gap-4">
         <Label htmlFor="noOfBedrooms" className="!text-btn">
           Number of Bedrooms:
         </Label>
@@ -227,7 +252,7 @@ const OrderNow = () => {
           {...form.register("postCode")}
           className="w-full border border-apex-grey-light"
         />
-      </div>
+      </div>*/}
       <Button
         type="submit"
         className="w-full text-white p-2 bg-apex-blue hover:bg-apex-blue"

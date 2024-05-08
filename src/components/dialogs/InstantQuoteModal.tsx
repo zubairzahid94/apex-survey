@@ -89,9 +89,12 @@ const InstantQuoteModal = () => {
                 checked={form.watch("propertyType") === item.id}
                 onCheckedChange={(checked) => {
                   if (checked) {
-                    form.setValue("propertyType", item.id);
-                  } else {
-                    form.setValue("propertyType", "");
+                    form.setValue(
+                      "propertyType",
+                      item.id as z.infer<
+                        typeof InstantQuoteSchema
+                      >["propertyType"]
+                    );
                   }
                 }}
                 className="bg-transparent data-[state=checked]:text-white data-[state=checked]:bg-apex-blue border border-gray-200 flex items-center justify-between p-3"

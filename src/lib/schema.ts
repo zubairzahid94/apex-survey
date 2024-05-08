@@ -146,13 +146,13 @@ export const FormSchema = z.object({
 });
 
 export const InstantQuoteSchema = z.object({
-    propertyType: z
-        .string({
-            required_error: "Please select a property type",
-        })
-        .min(1, {
-            message: "Please select a property type",
-        }),
+    propertyType: z.union([
+        z.literal("residential"),
+        z.literal("commercial"),
+        z.literal(""),
+    ], {
+        required_error: "Please select a property type",
+    }),
     services: z.array(z.string()).min(1, {
         message: "Please select at least one service",
     }),

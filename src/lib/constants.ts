@@ -136,54 +136,261 @@ export const serviceSteps = [
     },
 ];
 
-
-
 export const services = [
     {
-        id: "gas-safety-service",
-        label: "Gas Safety Service",
+        id: "electrical-installation-conditional-report-eicr",
+        label: "Electrcal Installation Conditional Report (EICR)",
+        servicePropertyType: ["residential"],
+        subFields: [
+            "property",
+            "noOfBedrooms",
+            "consumerUnits"
+        ]
     },
     {
-        id: "electrical-maintenance",
-        label: "Electrical Maintenance",
+        id: "energy-performance-certificate",
+        label: "Energy Performance Certificate",
+        servicePropertyType: ["residential"],
+        subFields: [
+            "property",
+            "noOfBedrooms",
+        ]
     },
     {
-        id: "electrical-ppm",
-        label: "Electrical PPM",
+        id: "elecrical-portable-appliance-test-pat",
+        label: "Eelctrical Portable Appliance Test (PAT)",
+        servicePropertyType: ["residential"],
+        subFields: [
+            "property",
+            "noOfElectricalAppliances"
+        ]
     },
     {
-        id: "building-survey-report",
-        label: "Building Survey Report",
+        id: "gas-safety-certificate",
+        label: "Gas Safety Certificate",
+        servicePropertyType: ["residential", "commercial"],
+        subFields: [
+            "property",
+            "noOfGasAppliances"
+        ]
     },
     {
-        id: "digital-mapping-report",
-        label: "Digital Mapping Report",
+        id: "boiler-service",
+        label: "Boiler Service",
+        servicePropertyType: ["residential"],
+        subFields: [
+            "property",
+        ]
     },
+    {
+        id: "fire-alarm-test-report",
+        label: "Fire Alarm Test Report",
+        servicePropertyType: ["residential", "commercial"],
+        subFields: [
+            "property",
+            "noOfBedrooms",
+        ]
+    },
+    {
+        id: "fire-risk-assessment",
+        label: "Fire Risk Assessment",
+        servicePropertyType: ["residential", "commercial"],
+        subFields: [
+            "property",
+            "noOfBedrooms",
+            "noOfFloors"
+        ]
+    },
+    {
+        id: "emergency-light-test-report-eltr",
+        label: "Emergency Light Test Report (ELTR)",
+        servicePropertyType: ["residential"],
+        subFields: [
+            "property",
+            "noOfBedrooms",
+        ]
+    },
+    {
+        id: "legionella-risk-assessement",
+        label: "Legionella Risk Assessment",
+        servicePropertyType: ["residential"],
+        subFields: [
+            "property",
+            "noOfBedrooms",
+        ]
+    },
+    {
+        id: "sap-assessement",
+        label: "SAP Assessement",
+        servicePropertyType: ["residential"],
+        subFields: [
+            "property",
+            "noOfBedrooms",
+        ]
+    },
+    {
+        id: "floor-plans",
+        label: "Floor Plans",
+        servicePropertyType: ["residential"],
+        subFields: [
+            "property",
+            "noOfBedrooms",
+        ]
+    },
+    {
+        id: "building-surveys-rics-lvl3",
+        label: "Building Surveys (RICS Level 3)",
+        servicePropertyType: ["residential"],
+        subFields: [
+            "property",
+            "noOfBedrooms",
+            "propertyAge"
+        ]
+    },
+    {
+        id: "house-valuation-survey",
+        label: "House Valuation Survey",
+        servicePropertyType: ["residential"],
+        subFields: [
+            "property",
+            "noOfBedrooms",
+        ]
+    },
+    {
+        id: "home-buyer-report-rics-lvl2",
+        label: "Home Buyer Report (RICS Level 2)",
+        servicePropertyType: ["residential"],
+        subFields: [
+            "property",
+            "noOfBedrooms",
+            "propertyAge",
+            "propertyValue",
+        ]
+    },
+    {
+        id: "management-asbestos-survey",
+        label: "Management Asbestos Survey",
+        servicePropertyType: ["residential"],
+        subFields: [
+            "property",
+            "noOfBedrooms",
+        ]
+    },
+    {
+        id: "electrical-installation-conditional-report-ceicr",
+        label: "Electrical Installation Conditional Report (CEICR)",
+        servicePropertyType: ["commercial"],
+        subFields: [
+            "property",
+            "consumerUnits",
+            "typeOfSupply",
+            "noOfCircuits"
+        ]
+    },
+    {
+        id: "electrical-portable-appliance-test-cpat",
+        label: "Electrical Portable Appliance Test (CPAT)",
+        servicePropertyType: ["commercial"],
+        subFields: [
+            "property",
+            "noOfElectricalAppliances",
+        ]
+    },
+    {
+        id: "display-energy-certificate",
+        label: "Display Energy Certificate",
+        servicePropertyType: ["commercial"],
+        subFields: [
+            "property",
+            "propertyArea"
+        ]
+    },
+    {
+        id: "commercial-epc",
+        label: "Commercial EPC",
+        servicePropertyType: ["commercial"],
+        subFields: [
+            "property",
+            "propertyArea"
+        ]
+    },
+    {
+        id: "emergency-light-test-report-celtr",
+        label: "Emergency Light Test Report (CELTR)",
+        servicePropertyType: ["commercial"],
+        subFields: [
+            "property",
+            "propertyArea"
+        ]
+    }
 ];
 
 export const properties = [
     {
         id: "mid-terraced-house",
         label: "Mid Terraced House",
+        propertyType: "residential",
+    },
+    {
+        id: "end-terraced",
+        label: "End Terraced / Semi House",
+        propertyType: "residential",
     },
     {
         id: "detached-house",
         label: "Detached House",
+        propertyType: "residential",
     },
     {
-        id: "townhouse",
-        label: "Townhouse",
+        id: "detached-bungalow",
+        label: "Detached Bungalow",
+        propertyType: "residential",
     },
     {
-        id: "flat",
-        label: "Flat",
+        id: "semi-detached-bungalow",
+        label: "Semi Detached Bungalow",
+        propertyType: "residential",
     },
+    {
+        id: "flat-maisonette-other",
+        label: "Flat / Maisonette / Other",
+        propertyType: "residential",
+    },
+    {
+        id: "pub-restaurant",
+        label: "Pub / Restaurant",
+        propertyType: "commercial",
+    },
+    {
+        id: "shop",
+        label: "Shop",
+        propertyType: "commercial",
+    },
+    {
+        id: "warehouse",
+        label: "Warehouse",
+        propertyType: "commercial",
+    },
+    {
+        id: "office",
+        label: "Office",
+        propertyType: "commercial",
+    },
+    {
+        id: "other",
+        label: "Other",
+        propertyType: "commercial",
+    }
 ];
 
 export const bedroomOptions = [
     {
+        id: "studio",
+        label: "Studio",
+    },
+    {
         id: "1",
-        label: "Single Bedroom",
+        label: "1 Bedroom",
     },
     {
         id: "2",
@@ -194,10 +401,109 @@ export const bedroomOptions = [
         label: "3 Bedrooms",
     },
     {
+        id: "4",
+        label: "4 Bedrooms",
+    },
+    {
         id: "5+",
         label: "5+ Bedrooms",
     },
 ];
+
+export const electricalAppliancesOptions = [
+    {
+        id: "1-10",
+        label: "1-10 Appliances",
+    },
+    {
+        id: "11-20",
+        label: "11-20 Appliances",
+    },
+    {
+        id: "21-30",
+        label: "21-30 Appliances",
+    },
+    {
+        id: "30+",
+        label: "30+ Appliances",
+    },
+]
+
+export const gasAppliancesOptions = [
+    {
+        id: "1",
+        label: "1 Gas Appliance",
+    },
+    {
+        id: "2",
+        label: "2 Gas Appliances",
+    },
+    {
+        id: "3",
+        label: "3 Gas Appliances",
+    },
+    {
+        id: "4+",
+        label: "4+ Gas Appliances",
+    },
+
+]
+
+export const floorOptions = [
+    {
+        id: "1",
+        label: "1 Floor"
+    },
+]
+
+export const typeOfSupply = [
+    {
+        id: "single",
+        label: "Single Phase",
+    },
+    {
+        id: "3",
+        label: "Three Phase"
+    },
+    {
+        id: "not-sure",
+        label: "Not Sure"
+    }
+]
+
+export const noOfCircuits = [
+    {
+        id: "10",
+        label: "upto 10 Circuits"
+    },
+    {
+        id: "20",
+        label: "upto 20 Circuits"
+    },
+    {
+        id: "30+",
+        label: "upto 30+ Circuits"
+    },
+
+]
+
+export const propertyAge = [
+    {
+        id: "pre-1940",
+        label: "Pre 1940",
+    },
+    {
+        id: "post-1940",
+        label: "Post 1940",
+    },
+]
+
+export const propertyPrice = [
+    {
+        id: "100k",
+        label: "Upto 100k"
+    }
+]
 
 export const socialLinks = [
     {
