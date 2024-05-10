@@ -9,8 +9,9 @@ import { Label } from "@/components/ui/label";
 import { bedroomOptions, properties, services } from "@/lib/constants";
 import { InstantQuoteSchema } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { CheckedState } from "@radix-ui/react-checkbox";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -35,6 +36,63 @@ const OrderNow = () => {
     router.push("/checkout");
   }
 
+  const handleChangeInPropertyType = (
+    checked: CheckedState,
+    itemId: string
+  ) => {
+    if (checked) {
+      form.setValue(
+        "propertyType",
+        itemId as z.infer<typeof InstantQuoteSchema>["propertyType"]
+      );
+      setSubFields([]);
+      form.setValue("services", []);
+    }
+  };
+
+  const handleChangeInService = (
+    checked: CheckedState,
+    item: z.infer<typeof InstantQuoteSchema>["services"][number]
+  ) => {
+    if (checked) {
+      form.setValue(
+        "services",
+        Array.isArray(form.watch("services"))
+          ? [...form.watch("services"), item]
+          : [item]
+      );
+      setSubFields([]);
+    } else {
+      form.setValue(
+        "services",
+        form.watch("services")?.filter((value) => value.id !== item.id)
+      );
+      //filter out subfields of the current item from subFields array
+      setSubFields([]);
+    }
+  };
+
+  useEffect(() => {
+    setSubFields((prev) => {
+      const newFields: string[] | undefined = form
+        .watch("services")
+        ?.map((item) => item.subFields)
+        ?.flat();
+
+      // remove duplicates from newFields array
+      const uniqueFields: string[] | undefined = newFields?.filter(
+        (item, index) => newFields.indexOf(item) === index
+      );
+
+      if (uniqueFields?.length <= 0 || !uniqueFields) {
+        return prev;
+      }
+
+      return [...prev, ...uniqueFields];
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [form.watch("services")]);
+
   return (
     <form
       onSubmit={form.handleSubmit(onSubmit)}
@@ -56,16 +114,9 @@ const OrderNow = () => {
               id={item.id}
               value={item.id}
               checked={form.watch("propertyType") === item.id}
-              onCheckedChange={(checked) => {
-                if (checked) {
-                  form.setValue(
-                    "propertyType",
-                    item.id as z.infer<
-                      typeof InstantQuoteSchema
-                    >["propertyType"]
-                  );
-                }
-              }}
+              onCheckedChange={(checked) =>
+                handleChangeInPropertyType(checked, item.id)
+              }
               className="bg-transparent data-[state=checked]:text-white data-[state=checked]:bg-apex-blue border border-gray-200 flex items-center justify-between p-3 w-1/2"
             >
               <Label
@@ -102,36 +153,12 @@ const OrderNow = () => {
               key={item.id}
               id={item.id}
               value={item.id}
-              checked={form.watch("services")?.includes(item.id)}
-              onCheckedChange={(checked) => {
-                if (checked) {
-                  form.setValue(
-                    "services",
-                    Array.isArray(form.watch("services"))
-                      ? [...form.watch("services"), item.id]
-                      : [item.id]
-                  );
-                  setSubFields((prev) => {  
-                    const newFields = item.subFields.filter(
-                      (field) => !prev.includes(field)
-                    );
-
-                    if (newFields.length <= 0) {
-                      return prev;
-                    }
-                    return [...prev, ...newFields];
-                  });
-                } else {
-                  form.setValue(
-                    "services",
-                    form.watch("services")?.filter((value) => value !== item.id)
-                  );
-                  //filter out subfields of the current item from subFields array
-                  // setSubFields((prev) => (
-                  //   // I will loop through all of the subfields of my currently selected item. and for each iteration, i will in turn loop through each of the subfields on all previously stored services. If atleast one of my currently selected item's field is such that it is not found in any of the previous services subField, then that field is unique and I will remove that and keep all other.
-                  // ))
-                }
-              }}
+              checked={form
+                .watch("services")
+                ?.some((value) => value.id === item.id)}
+              onCheckedChange={(checked) =>
+                handleChangeInService(checked, item)
+              }
               className="bg-transparent data-[state=checked]:text-white data-[state=checked]:bg-apex-blue border border-gray-200 flex items-center justify-between p-3"
             >
               <Label

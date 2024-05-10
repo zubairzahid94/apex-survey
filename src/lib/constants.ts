@@ -1,3 +1,6 @@
+import { z } from "zod";
+import { InstantQuoteSchema } from "./schema";
+
 export const contactInformation = [
     {
         type: "Client Support",
@@ -136,7 +139,7 @@ export const serviceSteps = [
     },
 ];
 
-export const services = [
+export const services: z.infer<typeof InstantQuoteSchema>["services"] = [
     {
         id: "electrical-installation-conditional-report-eicr",
         label: "Electrcal Installation Conditional Report (EICR)",

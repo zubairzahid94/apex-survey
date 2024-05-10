@@ -153,7 +153,17 @@ export const InstantQuoteSchema = z.object({
     ], {
         required_error: "Please select a property type",
     }),
-    services: z.array(z.string()).min(1, {
+    services: z.array(z.object({
+        id: z.string(),
+        label: z.string(),
+        servicePropertyType: z.array(z.union([
+            z.literal("residential"),
+            z.literal("commercial"),
+            z.literal(""),
+        ])),
+        subFields: z.array(z.string()),
+    }
+    )).min(1, {
         message: "Please select at least one service",
     }),
     property: z.string().min(1, {
