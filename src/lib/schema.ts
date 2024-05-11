@@ -168,14 +168,38 @@ export const InstantQuoteSchema = z.object({
     }),
     property: z.string().min(1, {
         message: "Please select a property",
+    }).optional(),
+    propertyArea: z.string().min(1, {
+        message: "Please select property area",
     }),
     noOfBedrooms: z.string().min(1, {
         message: "Please select number of bedrooms",
-    }),
-    noOfFuseBoxes: z.number().min(1, {
-        message: "Atleast one fuse box is required",
-    }),
+    }).optional(),
+    propertyAge: z.string().min(1, {
+        message: "Please select property age",
+    }).optional(),
+    propertyPrice: z.string().min(1, {
+        message: "Please select property price",
+    }).optional(),
+    noOfElectricalAppliances: z.string().min(1, {
+        message: "Please select number of electrical appliances",
+    }).optional(),
+    noOfGasAppliances: z.string().min(1, {
+        message: "Please select number of gas appliances",
+    }).optional(),
+    noOfFloors: z.string().min(1, {
+        message: "Please select number of floors",
+    }).optional(),
+    consumerUnits: z.string().min(1, {
+        message: "Please select consumer units",
+    }).optional().default("1"),
+    noOfCircuits: z.string().min(1, {
+        message: "Please select number of circuits",
+    }).optional(),
+    typeOfSupply: z.string().min(1, {
+        message: "Please select type of supply",
+    }).optional(),
     postCode: z.string().min(1, {
         message: "Please enter your postcode",
-    }),
+    }).optional(),
 });

@@ -6,12 +6,13 @@ import { Input } from "./ui/input";
 import { cn } from "@/lib/utils";
 
 export type CounterProps = {
-  value: number;
+  value: string;
   onChange: (value: number) => void;
   className?: string;
 };
 
 const Counter = ({ value, onChange, className }: CounterProps) => {
+  const numberValue = Number(value);
   return (
     <div
       className={cn(
@@ -22,16 +23,22 @@ const Counter = ({ value, onChange, className }: CounterProps) => {
       <Button
         variant="ghost"
         size="sm"
-        onClick={() => onChange(value > 1 ? value - 1 : value)}
+        onClick={(e) => {
+          e.preventDefault();
+          onChange(numberValue > 1 ? numberValue - 1 : numberValue);
+        }}
         className="text-2xl size-3 p-1"
       >
         -
       </Button>
-      <p className="text-para font-bold">{value}</p>
+      <p className="text-para font-bold">{numberValue}</p>
       <Button
         variant="ghost"
         size="sm"
-        onClick={() => onChange(value + 1)}
+        onClick={(e) => {
+          e.preventDefault();
+          onChange(numberValue + 1);
+        }}
         className="text-2xl size-3 p-1"
       >
         +

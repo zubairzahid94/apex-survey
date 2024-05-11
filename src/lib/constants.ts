@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { InstantQuoteSchema } from "./schema";
+import { SubField } from "@/types";
 
 export const contactInformation = [
     {
@@ -201,7 +202,8 @@ export const services: z.infer<typeof InstantQuoteSchema>["services"] = [
         subFields: [
             "property",
             "noOfBedrooms",
-            "noOfFloors"
+            "noOfFloors",
+            "propertyArea",
         ]
     },
     {
@@ -305,7 +307,7 @@ export const services: z.infer<typeof InstantQuoteSchema>["services"] = [
         servicePropertyType: ["commercial"],
         subFields: [
             "property",
-            "propertyArea"
+            "propertyArea",
         ]
     },
     {
@@ -457,6 +459,18 @@ export const floorOptions = [
         id: "1",
         label: "1 Floor"
     },
+    {
+        id: "2",
+        label: "2 Floors"
+    },
+    {
+        id: "3",
+        label: "3 Floors"
+    },
+    {
+        id: "4+",
+        label: "4+ Floors"
+    },
 ]
 
 export const typeOfSupply = [
@@ -507,6 +521,143 @@ export const propertyPrice = [
         label: "Upto 100k"
     }
 ]
+
+export const propertyArea = [
+    {
+        id: "50",
+        label: "Upto 50m²"
+    },
+    {
+        id: "100",
+        label: "Upto 100m²"
+    },
+    {
+        id: "200",
+        label: "Upto 200m²"
+    },
+    {
+        id: "300",
+        label: "Upto 300m²"
+    },
+    {
+        id: "500",
+        label: "Upto 500m²"
+    },
+    {
+        id: "750",
+        label: "Upto 750m²"
+    },
+    {
+        id: "1000",
+        label: "Upto 1000m²"
+    },
+    {
+        id: "1250",
+        label: "Upto 1250m²"
+    },
+    {
+        id: "1500",
+        label: "Upto 1500m²"
+    },
+    {
+        id: "1750",
+        label: "Upto 1750m²"
+    },
+    {
+        id: "2000",
+        label: "Upto 2000m²"
+    },
+    {
+        id: "2500",
+        label: "Upto 2500m²"
+    },
+    {
+        id: "3000",
+        label: "Upto 3000m²"
+    },
+    {
+        id: "3500",
+        label: "Upto 3500m²"
+    },
+    {
+        id: "4000",
+        label: "Upto 4000m²"
+    },
+    {
+        id: "5000+",
+        label: "5000m² +"
+    },
+]
+
+export const subFields: SubField[] = [
+    {
+        label: "Property Type",
+        id: "property",
+        options: properties,
+        fieldType: "checkbox"
+    },
+    {
+        label: "Property Age",
+        id: "propertyAge",
+        options: propertyAge,
+        fieldType: "checkbox"
+    },
+    {
+        label: "Property Value",
+        id: "propertyPrice",
+        options: propertyPrice,
+        fieldType: "checkbox"
+    },
+    {
+        label: "Number of Floors",
+        id: "noOfFloors",
+        options: floorOptions,
+        fieldType: "checkbox"
+    },
+    {
+        label: "Number of Gas Appliances (CP12)",
+        id: "noOfGasAppliances",
+        options: gasAppliancesOptions,
+        fieldType: "checkbox"
+    },
+    {
+        label: "Number of Electrical Appliances (PAT)",
+        id: "noOfElectricalAppliances",
+        options: electricalAppliancesOptions,
+        fieldType: "checkbox"
+    },
+    {
+        label: "Number of Bedrooms",
+        id: "noOfBedrooms",
+        options: bedroomOptions,
+        fieldType: "checkbox"
+    },
+    {
+        label: "Type of Supply",
+        id: "typeOfSupply",
+        options: typeOfSupply,
+        fieldType: "checkbox"
+    },
+    {
+        label: "Number of Circuits",
+        id: "noOfCircuits",
+        options: noOfCircuits,
+        fieldType: "checkbox"
+    },
+    {
+        label: "Consumer Unit(s)",
+        id: "consumerUnits",
+        options: [],
+        fieldType: "counter"
+    },
+    {
+        label: "Property Area m²",
+        id: "propertyArea",
+        options: propertyArea,
+        fieldType: "dropdown"
+    }
+]
+
 
 export const socialLinks = [
     {

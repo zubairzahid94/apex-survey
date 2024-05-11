@@ -81,7 +81,7 @@ const FaqsAccordian = () => {
       defaultValue={["item-1"]}
       value={activeFaqs}
       onValueChange={handleChangeInFaqs}
-      className="w-full lg:shadow-md lg:rounded-xl lg:p-6 lg:border lg:border-gray-200 lg:px-11 px-7"
+      className="w-[95%] mx-auto lg:shadow-md lg:rounded-xl lg:p-6 lg:border lg:border-gray-200 lg:px-11 px-7"
     >
       {faqs.map((faq, index) => (
         <AccordionItem value={`item-${index + 1}`} key={index}>

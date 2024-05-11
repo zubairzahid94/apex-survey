@@ -23,7 +23,7 @@ const Banner = ({ image, children, className }: BannerProps) => {
       </div>
       <div
         className={cn(
-          "absolute flex flex-col gap-4 left-10 bottom-10 xl:left-96 max-w-screen-xl",
+          "absolute flex flex-col gap-4 left-10 bottom-10 max-w-screen-xl",
           className
         )}
       >
