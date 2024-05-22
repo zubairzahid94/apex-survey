@@ -65,7 +65,7 @@ export default function Hero() {
                 </div>
                 <div className="flex items-start gap-4 text-white">
                   <Image
-                    src={"/icons/person.svg"}
+                    src={"/icons/person-white.svg"}
                     alt="Person"
                     height={20}
                     width={20}
@@ -100,7 +100,7 @@ export default function Hero() {
           <div className="flex flex-col xs:flex-row gap-4 lg:gap-12 items-end lg:items-center max-w-screen-xl mx-auto">
             <div className="flex gap-4 w-full lg:w-1/4">
               <Image
-                src={"/icons/clipboard.svg"}
+                src={"/icons/clipboard-white.svg"}
                 alt="Clipboard"
                 height={10}
                 width={10}

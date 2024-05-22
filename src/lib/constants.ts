@@ -2,6 +2,115 @@ import { z } from "zod";
 import { InstantQuoteSchema } from "./schema";
 import { SubField } from "@/types";
 
+export const revenueData = [
+    { name: "06", revenue: 300 },
+    { name: "07", revenue: 400 },
+    { name: "08", revenue: 450 },
+    { name: "09", revenue: 500 },
+    { name: "10", revenue: 350 },
+    { name: "11", revenue: 600 },
+    { name: "12", revenue: 400 },
+    { name: "13", revenue: 500 },
+    { name: "14", revenue: 450 },
+    { name: "15", revenue: 550 },
+    { name: "16", revenue: 600 },
+    { name: "17", revenue: 650 },
+    { name: "18", revenue: 500 },
+    { name: "19", revenue: 550 },
+    { name: "20", revenue: 700 },
+    { name: "21", revenue: 800 },
+];
+
+export const viewData = [
+    { name: "Apr", uv: 4000, pv: 2400, amt: 2400 },
+    { name: "May", uv: 3000, pv: 1398, amt: 2210 },
+    { name: "Jun", uv: 2000, pv: 9800, amt: 2290 },
+    { name: "Jul", uv: 2780, pv: 3908, amt: 2000 },
+    { name: "Aug", uv: 1890, pv: 4800, amt: 2181 },
+    { name: "Sep", uv: 2390, pv: 3800, amt: 2500 },
+    { name: "Oct", uv: 3490, pv: 4300, amt: 2100 },
+];
+
+export const dashboardQuotes = [
+    {
+        name: "Yoda Man",
+        email: "yoda@domain.com",
+        phone: "+1 555-236-777",
+        postcode: "55498",
+        surveyType: "Electrical Maintenance/PM",
+        address: "Lorem Ipsum Address",
+        cardNumber: "Approved",
+    },
+    {
+        name: "Jacob Mark",
+        email: "you@domain.com",
+        phone: "+1 555-236-777",
+        postcode: "55498",
+        surveyType: "Gas Safety Checks/CP12",
+        address: "Lorem Ipsum Address",
+        cardNumber: "Approved",
+    },
+    {
+        name: "John Doe",
+        email: "you@domain.com",
+        phone: "+1 555-236-777",
+        postcode: "55498",
+        surveyType: "Gas Safety Checks/CP12",
+        address: "Lorem Ipsum Address",
+        cardNumber: "Approved",
+    },
+    {
+        name: "Nate Smith",
+        email: "you@domain.com",
+        phone: "+1 555-236-777",
+        postcode: "55498",
+        surveyType: "Electrical Installation",
+        address: "Lorem Ipsum Address",
+        cardNumber: "Cancel",
+    },
+    {
+        name: "Jacob Mark",
+        email: "you@domain.com",
+        phone: "+1 555-236-777",
+        postcode: "55498",
+        surveyType: "Building Survey",
+        address: "Lorem Ipsum Address",
+        cardNumber: "Approved",
+    },
+    {
+        name: "John Matt",
+        email: "you@domain.com",
+        phone: "+1 555-236-777",
+        postcode: "55498",
+        surveyType: "Fire Risk Assessment",
+        address: "Lorem Ipsum Address",
+        cardNumber: "Approved",
+    },
+]
+
+export const dashboardLinks = [
+    {
+        name: "Dashboard",
+        href: "/dashboard",
+        icon: "/icons/blocks.svg",
+    },
+    {
+        name: "Quotes",
+        href: "/dashboard/quotes",
+        icon: "/icons/clipboard.svg",
+    },
+    {
+        name: "Customers",
+        href: "/dashboard/customers",
+        icon: "/icons/person.svg",
+    },
+    {
+        name: "Add Pricing",
+        href: "/dashboard/pricing",
+        icon: "/icons/plus.svg",
+    },
+];
+
 export const contactInformation = [
     {
         type: "Client Support",
@@ -10,12 +119,12 @@ export const contactInformation = [
     },
     {
         type: "Email",
-        icon: "/icons/mail.svg",
+        icon: "/icons/mail-white.svg",
         details: "XsDfA@example.com",
     },
     {
         type: "Main Office",
-        icon: "/icons/mail.svg",
+        icon: "/icons/mail-white.svg",
         details: "123 Street, City, State, Zip",
     },
 ];
@@ -668,7 +777,7 @@ export const socialLinks = [
     {
         name: "Mail",
         path: "https://twitter.com/",
-        iconPath: "/icons/mail.svg",
+        iconPath: "/icons/mail-white.svg",
     },
     {
         name: "Instagram",

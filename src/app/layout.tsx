@@ -25,9 +25,7 @@ export default function RootLayout({
           OpenSans.variable
         )}
       >
-        <Header />
         <main className="min-h-screen">{children}</main>
-        <Footer />
       </body>
     </html>
   );
