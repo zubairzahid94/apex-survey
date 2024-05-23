@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model InstantQuote {
+  id                       String       @id @default(uuid()) @map("_id")
+  propertyType             PropertyType
+  services                 Service[]
+  property                 String?
+  propertyArea             String
+  noOfBedrooms             String?
+  propertyAge              String?
+  propertyPrice            String?
+  noOfElectricalAppliances String?
+  noOfGasAppliances        String?
+  noOfFloors               String?
+  consumerUnits            String       @default("1")
+  noOfCircuits             String?
+  typeOfSupply             String?
+  postCode                 String?
+}
+
+model Service {
+  id                  String                @id @default(uuid()) @map("_id")
+  label               String
+  servicePropertyType ServicePropertyType[]
+  subFields           String[]
+  instantQuoteId      String?
+  InstantQuote        InstantQuote?         @relation(fields: [instantQuoteId], references: [id])
+}
+
+enum PropertyType {
+  residential
+  commercial
+}
+
+enum ServicePropertyType {
+  residential
+  commercial
+}

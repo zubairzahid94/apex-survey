@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import toast, { Toaster } from 'react-hot-toast';
 
 const OpenSans = Open_Sans({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -25,7 +26,8 @@ export default function RootLayout({
           OpenSans.variable
         )}
       >
-        <main className="min-h-screen">{children}</main>
+        <main className="min-h-screen">
+          <Toaster />{children}</main>
       </body>
     </html>
   );

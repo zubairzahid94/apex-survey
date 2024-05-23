@@ -33,7 +33,7 @@ const Checkout = () => {
 
   const submitHandler = (data: z.infer<typeof checkoutSchema>) => {
     console.log(data);
-    alert(JSON.stringify(data, null, 2));
+    console.log(alert(JSON.stringify(data, null, 2)));
     form.reset();
   };
 

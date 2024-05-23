@@ -8,8 +8,20 @@ import Image from "next/image";
 
 import React from "react";
 import DetailsTable from "../components/DetailsTable";
+import { prisma } from "../../../../lib/db";
 
-const Quotes = () => {
+
+const Quotes = async () => {
+  const quotes = await prisma.instantQuote.findMany({
+    include: {
+      services: true,
+    }
+
+  })
+  console.log('orders', quotes)
+
+  const countQuotes = quotes.length.toString();
+
   return (
     <div className="h-full overflow-y-scroll space-y-4 no-scrollbar pr-4">
       <Card className="flex-1 p-4 flex items-center justify-between gap-2 shadow-none">
@@ -41,7 +53,7 @@ const Quotes = () => {
           </Card>
           <Card className="flex-1 flex items-center justify-between px-4 py-8 shadow-none">
             <div className="space-y-1">
-              <p className="text-btn">2356</p>
+              <p className="text-btn">{countQuotes}</p>
               <p className="text-para">Total Quotes</p>
             </div>
             <div className="flex items-center justify-center size-10 bg-apex-blue p-2">
@@ -70,7 +82,7 @@ const Quotes = () => {
         </div>
       </div>
 
-      <DetailsTable />
+      <DetailsTable quotes={quotes} countQoutes={countQuotes} />
     </div>
   );
 };

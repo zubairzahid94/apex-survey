@@ -21,13 +21,15 @@ import {
 } from "@/lib/constants";
 import { InstantQuoteSchema } from "@/lib/schema";
 import { cn } from "@/lib/utils";
-import { SubField } from "@/types";
+import type { SubField } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckedState } from "@radix-ui/react-checkbox";
+import type { CheckedState } from "@radix-ui/react-checkbox";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import type { z } from "zod";
+import axios from "axios"
+import toast, { Toaster } from 'react-hot-toast';
 
 //TODO: This page is having a lot of repeated code from the instant Quote Modal. So try to reuse that code instead of just copying pasting it here
 
@@ -40,12 +42,19 @@ const OrderNow = () => {
 
   const [subFields, setSubFields] = useState<string[]>([]);
 
-  function onSubmit(data: z.infer<typeof InstantQuoteSchema>) {
-    console.log(data);
-    alert(JSON.stringify(data, null, 2));
-    form.reset();
-    setSubFields([]);
-    router.push("/checkout");
+  async function onSubmit(data: z.infer<typeof InstantQuoteSchema>) {
+    try {
+      await axios.post('/api/order', data);
+      console.log('data', data);
+      form.reset();
+      setSubFields([]);
+      // router.push("/checkout");
+      toast.success("Successfuly Ordered")
+    } catch (error: any) {
+      // toast.error("Something went wrong", error);
+      toast.success("Unsuccessful")
+    }
+
   }
 
   const handleChangeInPropertyType = (
@@ -166,8 +175,7 @@ const OrderNow = () => {
     setSubFields((prev) => {
       const newFields: string[] | undefined = form
         .watch("services")
-        ?.map((item) => item.subFields)
-        ?.flat();
+        ?.flatMap((item) => item.subFields);
 
       // remove duplicates from newFields array
       const uniqueFields: string[] | undefined = newFields?.filter(
@@ -268,10 +276,10 @@ const OrderNow = () => {
       )}
       {renderSubFields
         .filter((item) => subFields.includes(item.id))
-        .map((item, index) => {
+        .map((item) => {
           return (
-            <>
-              <div className="w-full flex flex-col gap-4" key={index}>
+            <React.Fragment key={item.id}>
+              <div className="w-full flex flex-col gap-4">
                 <Label htmlFor={item.id} className="!text-btn">
                   Select {item.label}:
                 </Label>
@@ -283,8 +291,7 @@ const OrderNow = () => {
                 <div
                   className={cn(
                     "grid gap-4 w-full",
-                    item.fieldType === "counter" ||
-                      item.fieldType === "dropdown"
+                    item.fieldType === "counter" || item.fieldType === "dropdown"
                       ? "grid-cols-1"
                       : "grid-cols-1 md:grid-cols-2"
                   )}
@@ -293,7 +300,7 @@ const OrderNow = () => {
                 </div>
               </div>
               <hr className="my-4 w-full bg-apex-grey-light" />
-            </>
+            </React.Fragment>
           );
         })}
       {form.watch("propertyType") && form.watch("services") && (
