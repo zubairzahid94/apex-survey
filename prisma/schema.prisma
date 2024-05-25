@@ -92,3 +92,10 @@ model Checkout {
   quoteId       String        @unique
   quote         InstantQuote? @relation(fields: [quoteId], references: [id])
 }
+
+model Pricing {
+  id          String   @id @default(uuid()) @map("_id")
+  serviceName String
+  pricing     String
+  surveyType  String[] // Changed to an array of strings
+}

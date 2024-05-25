@@ -1,3 +1,4 @@
+
 "use client";
 
 import Counter from "@/components/Counter";
@@ -50,7 +51,7 @@ const OrderNow = () => {
       // console.log('data', data);
       form.reset();
       setSubFields([]);
-      toast.success("Successfuly Ordered")
+      toast.success("Quote Added moving to Checkout")
       router.push(`/checkout?orderId=${orderId}`);
       // router.push("/checkout");
 

@@ -22,6 +22,7 @@ const PricingPage = () => {
           <PricingForm />
         </div>
       </Card>
+
     </div>
   );
 };

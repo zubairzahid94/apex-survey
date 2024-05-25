@@ -246,13 +246,18 @@ export const PricingSchema = z.object({
 	serviceName: z.string().min(1, {
 		message: "Please enter the service name",
 	}),
-	pricing: z.number().min(0, {
+	pricing: z.string().min(0, {
 		message: "Please enter a valid price",
 	}),
-	surveyType: z.union(
-		[z.literal("residential"), z.literal("commercial"), z.literal("")],
-		{
-			required_error: "Please select a survey type",
-		},
-	),
+	// surveyType: z.array(
+	// 	z.string().min(1, {
+	// 		message: "Please select a survey type",
+	// 	}),
+	// ),
+	surveyType: z.string(),
 });
+// export const PricingSchema = z.object({
+// 	serviceName: z.string(),
+// 	pricing: z.string(),
+// 	surveyType: z.array(z.string()),
+// });

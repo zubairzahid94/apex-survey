@@ -100,11 +100,6 @@ export const dashboardLinks = [
 		icon: "/icons/clipboard.svg",
 	},
 	{
-		name: "Services",
-		href: "/dashboard/services",
-		icon: "/icons/person.svg",
-	},
-	{
 		name: "Add Pricing",
 		href: "/dashboard/pricing",
 		icon: "/icons/plus.svg",

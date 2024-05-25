@@ -1,25 +1,30 @@
+// @ts-nocheck 
 'use client'
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { PricingSchema } from '@/lib/schema';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import Error from '@/components/Error';
-import { cn } from '@/lib/utils';
+import toast from 'react-hot-toast';
+import axios from 'axios';
+
+const predefinedSurveyTypes = [
+    "Survey Construction Report",
+    "Digital Mapping Report",
+    "Engineering Support Report",
+];
 
 const PricingForm = () => {
-    const form = useForm({
-        resolver: zodResolver(PricingSchema),
-    });
+    const [serviceName, setServiceName] = useState('');
+    const [pricing, setPricing] = useState('');
     const [customSurveyType, setCustomSurveyType] = useState('');
     const [surveyTypes, setSurveyTypes] = useState<string[]>([]);
 
-    const handleAddSurveyType = () => {
-        if (customSurveyType.trim() !== '') {
-            setSurveyTypes((prev) => [...prev, customSurveyType.trim()]);
-            setCustomSurveyType('');
+    const handleAddSurveyType = (type: string) => {
+        if (type.trim() !== '' && !surveyTypes.includes(type.trim())) {
+            setSurveyTypes((prev) => [...prev, type.trim()]);
         }
     };
 
@@ -27,26 +32,40 @@ const PricingForm = () => {
         setSurveyTypes((prev) => prev.filter((type) => type !== surveyType));
     };
 
-    const onSubmit = (data) => {
-        console.log(data);
-        alert(JSON.stringify(data, null, 2));
-        form.reset();
+    const onSubmit = async (e) => {
+        try {
+            e.preventDefault()
+            console.log('submited')
+            const data = {
+                serviceName,
+                pricing,
+                surveyType: surveyTypes,
+            };
+            console.log('data', data)
+            const response = await axios.post('/api/services', data);
+            toast.success("Service added");
+            setServiceName('');
+            setPricing('');
+            setSurveyTypes([]);
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
     };
 
     return (
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={(e) => onSubmit(e)} className="space-y-4">
             <div className="space-y-2">
                 <Label htmlFor="serviceName" className="!text-para">
                     Service Name
                 </Label>
                 <Input
                     id="serviceName"
-                    {...form.register("serviceName")}
-                    className={cn(form.formState.errors.serviceName ? "!border-red-500" : "")}
+                    value={serviceName}
+                    onChange={(e) => setServiceName(e.target.value)}
                     placeholder="Enter service name"
                 />
-                {form.formState.errors.serviceName && (
-                    <Error message={form.formState.errors.serviceName.message} />
+                {serviceName === '' && (
+                    <Error message="Please enter the service name" />
                 )}
             </div>
 
@@ -57,12 +76,12 @@ const PricingForm = () => {
                 <Input
                     id="pricing"
                     type="number"
-                    {...form.register("pricing")}
-                    className={cn(form.formState.errors.pricing ? "!border-red-500" : "")}
+                    value={pricing}
+                    onChange={(e) => setPricing(e.target.value)}
                     placeholder="Enter price"
                 />
-                {form.formState.errors.pricing && (
-                    <Error message={form.formState.errors.pricing.message} />
+                {pricing === '' && (
+                    <Error message="Please enter a valid price" />
                 )}
             </div>
 
@@ -92,11 +111,28 @@ const PricingForm = () => {
                     />
                     <Button
                         type="button"
-                        onClick={handleAddSurveyType}
+                        onClick={() => handleAddSurveyType(customSurveyType)}
                         className="text-btn p-2 text-white bg-apex-blue hover:bg-apex-blue"
                     >
                         Add
                     </Button>
+                </div>
+                <div className="space-y-2">
+                    <Label htmlFor="predefinedSurveyTypes" className="!text-para">
+                        Predefined Survey Types
+                    </Label>
+                    <div className="flex flex-wrap items-center gap-2">
+                        {predefinedSurveyTypes.map((type) => (
+                            <Button
+                                key={type}
+                                type="button"
+                                onClick={() => handleAddSurveyType(type)}
+                                className="text-btn p-2 text-white bg-apex-blue hover:bg-apex-blue"
+                            >
+                                {type}
+                            </Button>
+                        ))}
+                    </div>
                 </div>
             </div>
 
