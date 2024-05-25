@@ -5,7 +5,7 @@ import React from "react";
 import Heading from "./components/Heading";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { z } from "zod";
+import type { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
@@ -16,8 +16,15 @@ import Error from "@/components/Error";
 import { cn } from "@/lib/utils";
 import ContactAccess from "./components/ContactAccess";
 import { checkoutSchema } from "@/lib/schema";
+import axios from "axios"
+import toast, { Toaster } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation'
 
 const Checkout = () => {
+  const searchParams = useSearchParams()
+
+  const orderId = searchParams.get('orderId')
   const form = useForm<z.infer<typeof checkoutSchema>>({
     resolver: zodResolver(checkoutSchema),
     defaultValues: {
@@ -31,10 +38,26 @@ const Checkout = () => {
     "card"
   );
 
-  const submitHandler = (data: z.infer<typeof checkoutSchema>) => {
-    console.log(data);
+  const submitHandler = async (data: z.infer<typeof checkoutSchema>) => {
+
+    console.log('checkoutinfor', data);
     console.log(alert(JSON.stringify(data, null, 2)));
-    form.reset();
+    // form.reset();
+    try {
+      const qouteId = orderId
+      console.log('qoid', qouteId);
+
+      const response = await axios.post(`/api/checkout/${qouteId}`, data);
+      console.log('res', response)
+      toast.success("Successfuly Ordered")
+      // console.log('data', data);
+      // form.reset();
+      // router.push("/checkout");
+
+    } catch (error: any) {
+      // toast.error("Something went wrong", error);
+      toast.success("Unsuccessful")
+    }
   };
 
   return (

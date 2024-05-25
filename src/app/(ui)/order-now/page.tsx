@@ -44,12 +44,16 @@ const OrderNow = () => {
 
   async function onSubmit(data: z.infer<typeof InstantQuoteSchema>) {
     try {
-      await axios.post('/api/order', data);
-      console.log('data', data);
+      const response = await axios.post('/api/order', data);
+      const orderId = response.data.id;
+      console.log('id', orderId);
+      // console.log('data', data);
       form.reset();
       setSubFields([]);
-      // router.push("/checkout");
       toast.success("Successfuly Ordered")
+      router.push(`/checkout?orderId=${orderId}`);
+      // router.push("/checkout");
+
     } catch (error: any) {
       // toast.error("Something went wrong", error);
       toast.success("Unsuccessful")

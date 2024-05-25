@@ -29,6 +29,7 @@ model InstantQuote {
   noOfCircuits             String?
   typeOfSupply             String?
   postCode                 String?
+  checkout                 Checkout?
 }
 
 model Service {
@@ -48,4 +49,46 @@ enum PropertyType {
 enum ServicePropertyType {
   residential
   commercial
+}
+
+enum PaymentMethod {
+  card
+  bank
+}
+
+enum ContactType {
+  me
+  Seller
+  Buyer
+  Tenant
+  LandLord
+  Agent
+  Other
+}
+
+model Checkout {
+  id            String        @id @default(uuid()) @map("_id")
+  contactType   ContactType
+  contactName   String?
+  contactEmail  String?
+  phoneNumber1  String?
+  phoneNumber2  String?
+  paymentMethod PaymentMethod
+  nameOnCard    String?
+  cardNumber    String?
+  expiryDate    String?
+  CVVCode       String?
+  bankName      String?
+  IBANNumber    String?
+  accountType   String?
+  accountName   String?
+  govtId        String?
+  fullName      String
+  email         String
+  postCode      String
+  address       String
+  phone         String
+  acceptTos     Boolean
+  quoteId       String        @unique
+  quote         InstantQuote? @relation(fields: [quoteId], references: [id])
 }

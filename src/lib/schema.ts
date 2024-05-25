@@ -241,3 +241,18 @@ export const InstantQuoteSchema = z.object({
 		})
 		.optional(),
 });
+
+export const PricingSchema = z.object({
+	serviceName: z.string().min(1, {
+		message: "Please enter the service name",
+	}),
+	pricing: z.number().min(0, {
+		message: "Please enter a valid price",
+	}),
+	surveyType: z.union(
+		[z.literal("residential"), z.literal("commercial"), z.literal("")],
+		{
+			required_error: "Please select a survey type",
+		},
+	),
+});
