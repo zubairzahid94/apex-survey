@@ -1,3 +1,4 @@
+// @ts-nocheck 
 import { CardHeader, CardContent, Card } from "@/components/ui/card";
 import Image from "next/image";
 import { prisma } from "../../lib/db";

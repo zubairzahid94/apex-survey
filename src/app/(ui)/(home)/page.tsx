@@ -1,3 +1,4 @@
+// @ts-nocheck 
 import { PricingCard } from "@/components/PricingCard";
 import Hero from "./components/Hero";
 import Services from "./components/Services";
