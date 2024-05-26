@@ -35,13 +35,13 @@ const PricingForm = () => {
     const onSubmit = async (e) => {
         try {
             e.preventDefault()
-            console.log('submited')
+
             const data = {
                 serviceName,
                 pricing,
                 surveyType: surveyTypes,
             };
-            console.log('data', data)
+
             const response = await axios.post('/api/services', data);
             toast.success("Service added");
             setServiceName('');

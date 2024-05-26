@@ -40,19 +40,17 @@ const Checkout = () => {
 
   const submitHandler = async (data: z.infer<typeof checkoutSchema>) => {
 
-    console.log('checkoutinfor', data);
-    console.log(alert(JSON.stringify(data, null, 2)));
-    // form.reset();
+
+
     try {
       const qouteId = orderId
-      console.log('qoid', qouteId);
+
 
       const response = await axios.post(`/api/checkout/${qouteId}`, data);
-      console.log('res', response)
+
       toast.success("Successfuly Ordered")
-      // console.log('data', data);
-      // form.reset();
-      // router.push("/checkout");
+      form.reset();
+
 
     } catch (error: any) {
       // toast.error("Something went wrong", error);

@@ -47,8 +47,7 @@ const OrderNow = () => {
     try {
       const response = await axios.post('/api/order', data);
       const orderId = response.data.id;
-      console.log('id', orderId);
-      // console.log('data', data);
+
       form.reset();
       setSubFields([]);
       toast.success("Quote Added moving to Checkout")

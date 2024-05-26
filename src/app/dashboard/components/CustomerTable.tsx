@@ -17,7 +17,7 @@ interface CustomerProps {
 }
 
 const CustomerTable = ({ quotes, countQuotes }: CustomerProps) => {
-    // console.log("quotes", quotes);
+
 
     return (
         <section className="w-full px-4 py-6 flex flex-col gap-4 rounded-xl bg-white">
