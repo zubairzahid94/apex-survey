@@ -98,4 +98,5 @@ model Pricing {
   serviceName String
   pricing     String
   surveyType  String[] // Changed to an array of strings
+  status      String   @default("enabled")
 }
