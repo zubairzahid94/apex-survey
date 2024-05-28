@@ -17,6 +17,7 @@ export async function PUT(
 			data: { status },
 		});
 		update(["/dashboard/pricing"]);
+		update(["/"]);
 		return NextResponse.json(updatedPricing);
 	} catch (error) {
 		console.error("Error updating status:", error);

@@ -16,6 +16,7 @@ export async function DELETE(
 			},
 		});
 		update(["/dashboard/pricing"]);
+		update(["/"]);
 		return NextResponse.json(deletepricing);
 	} catch (error) {
 		console.error("Error deleting status:", error);
