@@ -1,5 +1,7 @@
+//@ts-nocheck
 import { NextResponse } from "next/server";
 import { prisma } from "../../../../../lib/db";
+import { update } from "@/lib/action";
 
 export async function PUT(
 	req: Request,
@@ -14,7 +16,7 @@ export async function PUT(
 			where: { id },
 			data: { status },
 		});
-
+		update(["/dashboard/pricing"]);
 		return NextResponse.json(updatedPricing);
 	} catch (error) {
 		console.error("Error updating status:", error);

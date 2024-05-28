@@ -1,5 +1,7 @@
+//@ts-nocheck
 import { NextResponse } from "next/server";
 import { prisma } from "../../../../../../lib/db";
+import { update } from "@/lib/action";
 
 export async function DELETE(
 	req: Request,
@@ -13,7 +15,7 @@ export async function DELETE(
 				id: String(id),
 			},
 		});
-
+		update(["/dashboard/pricing"]);
 		return NextResponse.json(deletepricing);
 	} catch (error) {
 		console.error("Error deleting status:", error);

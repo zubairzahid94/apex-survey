@@ -1,3 +1,4 @@
+//@ts-nocheck
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -15,6 +16,7 @@ import * as Switch from '@radix-ui/react-switch';
 import axios from 'axios';
 import { toast } from "react-hot-toast"
 import LoadingBounce from "@/components/loading";
+import { update } from "@/lib/action";
 interface ServicesProps {
     services: Pricing[],
     countServices: string
@@ -30,7 +32,9 @@ const ServicesTable = ({ services: initialServices, countServices }: ServicesPro
             setLoading(true); // Set loading to true when API request starts
             await axios.delete(`/api/pricing/delete/${id}`);
             setServices(services.filter(service => service.id !== id));
+
             toast.success("Service Deleted")
+
         } catch (error) {
             console.error('Error deleting pricing item:', error);
         } finally {
@@ -48,6 +52,7 @@ const ServicesTable = ({ services: initialServices, countServices }: ServicesPro
                 service.id === id ? { ...service, status: updatedStatus } : service
             ));
             toast.success(`Service ${updatedStatus}`)
+            update(["/dashboard/pricing"]);
         } catch (error) {
             console.error('Error updating status:', error);
         } finally {

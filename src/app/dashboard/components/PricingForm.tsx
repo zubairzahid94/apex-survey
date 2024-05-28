@@ -43,10 +43,12 @@ const PricingForm = () => {
             };
 
             const response = await axios.post('/api/services', data);
+
             toast.success("Service added");
             setServiceName('');
             setPricing('');
             setSurveyTypes([]);
+            update(["/dashboard/pricing"]);
         } catch (error) {
             console.error('Error submitting form:', error);
         }
