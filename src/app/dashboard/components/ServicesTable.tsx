@@ -92,7 +92,7 @@ const ServicesTable = ({ services: initialServices, countServices }: ServicesPro
                                 <td className="text-center col-span-3 md:col-span-2">{service.surveyType.join(', ')}</td>
                                 <td className="text-center col-span-2 md:col-span-2">
                                     <Switch.Root
-                                        className="w-[42px] h-[25px] bg-blackA6 rounded-full relative shadow-[0_2px_10px] shadow-blackA4 data-[state=checked]:bg-black outline-none cursor-default"
+                                        className="w-[42px] h-[25px] bg-blackA6 rounded-full relative shadow-[0_2px_10px] shadow-blackA4 data-[state=checked]:bg-green-500 outline-none cursor-pointer"
                                         checked={service.status === "enabled"}
                                         onCheckedChange={() => handleStatusChange(service.id, service.status)}
                                     >

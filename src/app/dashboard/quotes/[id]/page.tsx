@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { prisma } from '../../../../../lib/db';
+import { Button } from '@/components/ui/button';
 
 const CheckoutDetails = async ({ params }: { params: { id: string } }) => {
     const checkouts = await prisma.checkout.findUnique({
@@ -79,6 +80,8 @@ const CheckoutDetails = async ({ params }: { params: { id: string } }) => {
                                     )}
 
                                     {/* Display other checkouts details */}
+
+
                                 </dl>
                             </div>
                         )}
@@ -112,8 +115,17 @@ const CheckoutDetails = async ({ params }: { params: { id: string } }) => {
                                     </div>
 
                                     {/* Display other quote details */}
+
+
                                 </dl>
+                                <div className='flex flex-row justify-between mt-4 items-center gap-4 '>
+                                    <Button variant={"secondary"}>Print</Button>
+                                    <Button variant={"default"}>Accept</Button>
+                                    <Button variant={"destructive"}>Decline</Button>
+                                </div>
+
                             </div>
+
                         </div>
                     </Card>
                 )}

@@ -1,4 +1,4 @@
-// @ts-nocheck 
+// @ts-nocheck
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -7,10 +7,9 @@ import { dashboardQuotes } from "@/lib/constants";
 import { BuildingIcon } from "lucide-react";
 import Image from "next/image";
 
-import React from "react";
+import React, { Suspense } from "react";
 import DetailsTable from "../components/DetailsTable";
 import { prisma } from "../../../../lib/db";
-
 
 const Quotes = async () => {
   const checkouts = await prisma.checkout.findMany({
@@ -23,10 +22,11 @@ const Quotes = async () => {
     },
   });
 
-  console.log('checkouts', checkouts);
+
 
   const countCheckouts = checkouts.length.toString();
-  console.log('Number of checkouts:', countCheckouts);
+  const countQuotes = checkouts.reduce((acc, checkout) => acc + (checkout.quote ? 1 : 0), 0).toString();
+
 
   return (
     <div className="h-full overflow-y-scroll space-y-4 no-scrollbar pr-4">
@@ -44,7 +44,7 @@ const Quotes = async () => {
         <div className="grid grid-cols-2 gap-2 w-full">
           <Card className="flex-1 flex items-center justify-between px-4 py-8 shadow-none">
             <div className="space-y-1">
-              <p className="text-btn">2356</p>
+              <p className="text-btn">{countCheckouts}</p>
               <p className="text-para">Total Customers</p>
             </div>
             <div className="flex items-center justify-center size-10 bg-apex-blue p-2">
@@ -59,7 +59,7 @@ const Quotes = async () => {
           </Card>
           <Card className="flex-1 flex items-center justify-between px-4 py-8 shadow-none">
             <div className="space-y-1">
-              <p className="text-btn">{countCheckouts}</p>
+              <p className="text-btn">{countQuotes}</p>
               <p className="text-para">Total Quotes</p>
             </div>
             <div className="flex items-center justify-center size-10 bg-apex-blue p-2">
@@ -87,7 +87,10 @@ const Quotes = async () => {
           </Card>
         </div>
       </div>
-      <DetailsTable checkouts={checkouts} countCheckouts={countCheckouts} />
+
+      <Suspense fallback={<div>Loading details...</div>}>
+        <DetailsTable checkouts={checkouts} countCheckouts={countCheckouts} />
+      </Suspense>
     </div>
   );
 };
