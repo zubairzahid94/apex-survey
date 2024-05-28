@@ -1,3 +1,4 @@
+//@ts-nocheck
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -20,10 +21,12 @@ import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
+import { useState } from "react";
 
 const CheckoutContent = () => {
   const route = useRouter()
   const searchParams = useSearchParams();
+  const [loading, setLoading] = useState(false);
 
   const orderId = searchParams.get('orderId');
   if (orderId == null) {
@@ -43,14 +46,19 @@ const CheckoutContent = () => {
 
   const submitHandler = async (data: z.infer<typeof checkoutSchema>) => {
     try {
+      setLoading(true);
       const qouteId = orderId;
 
       const response = await axios.post(`/api/checkout/${qouteId}`, data);
 
       toast.success("Successfully Ordered");
       form.reset();
+      route.push("/")
     } catch (error: any) {
       toast.error("Something went wrong");
+    }
+    finally {
+      setLoading(false); // Set loading to false after API call
     }
   };
 
@@ -207,8 +215,23 @@ const CheckoutContent = () => {
               {form.formState.errors.acceptTos && (
                 <Error message={form.formState.errors.acceptTos.message ?? ""} className="block w-full" />
               )}
-              <Button className="text-btn p-2 text-white bg-apex-blue hover:bg-apex-blue w-full text-center" type="submit">
-                Place Order
+              <Button
+                className="text-btn p-2 text-white bg-apex-blue hover:bg-apex-blue w-full text-center relative"
+                type="submit"
+                disabled={loading} // Disable button while loading
+              >
+                {loading && ( // Show loader if loading is true
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="flex flex-row gap-2">
+                      <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce" />
+                      <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.3s]" />
+                      <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.5s]" />
+                    </div>
+                  </div>
+                )}
+                <span className={loading ? "opacity-0" : "opacity-100"}>
+                  Place Order
+                </span>
               </Button>
             </div>
           </fieldset>

@@ -10,8 +10,12 @@ import Image from "next/image";
 import React, { Suspense } from "react";
 import DetailsTable from "../components/DetailsTable";
 import { prisma } from "../../../../lib/db";
+import Link from "next/link";
+import LoadingBounce from "@/components/loading";
+import { update } from "@/lib/action";
 
 const Quotes = async () => {
+
   const checkouts = await prisma.checkout.findMany({
     include: {
       quote: {
@@ -20,13 +24,19 @@ const Quotes = async () => {
         },
       },
     },
+    orderBy: {
+      updatedAt: "desc"
+    }
+
   });
-
-
+  const handleRefresh = async () => {
+    "use server"
+    update(["/quotes"]);
+  }
 
   const countCheckouts = checkouts.length.toString();
-  const countQuotes = checkouts.reduce((acc, checkout) => acc + (checkout.quote ? 1 : 0), 0).toString();
-
+  const pendingCheckouts = checkouts.filter(checkout => checkout.status === 'Pending');
+  const countPendingCheckouts = pendingCheckouts.length.toString();
 
   return (
     <div className="h-full overflow-y-scroll space-y-4 no-scrollbar pr-4">
@@ -35,9 +45,15 @@ const Quotes = async () => {
           <h5 className="text-btn">Quotes</h5>
           <p className="text-para">Quotes List</p>
         </div>
-        <Button className="bg-gray-400 hover:bg-gray-400 px-8 py-2 text-btn text-black rounded-lg">
-          Refresh
-        </Button>
+        {/* <Link href={"/dashboard/quotes"}> */}
+        <form>
+          <input formAction={handleRefresh} name="button" id="button" className="hidden" />
+          <Button className="bg-gray-400 hover:bg-gray-400 px-8 py-2 text-btn text-black rounded-lg">
+            Refresh
+          </Button>
+        </form>
+        {/* </Link> */}
+
       </Card>
 
       <div className="flex gap-2">
@@ -59,8 +75,8 @@ const Quotes = async () => {
           </Card>
           <Card className="flex-1 flex items-center justify-between px-4 py-8 shadow-none">
             <div className="space-y-1">
-              <p className="text-btn">{countQuotes}</p>
-              <p className="text-para">Total Quotes</p>
+              <p className="text-btn">{countPendingCheckouts}</p>
+              <p className="text-para">Pending Checkouts</p>
             </div>
             <div className="flex items-center justify-center size-10 bg-apex-blue p-2">
               <Image
@@ -88,7 +104,7 @@ const Quotes = async () => {
         </div>
       </div>
 
-      <Suspense fallback={<div>Loading details...</div>}>
+      <Suspense fallback={<div><LoadingBounce /></div>}>
         <DetailsTable checkouts={checkouts} countCheckouts={countCheckouts} />
       </Suspense>
     </div>

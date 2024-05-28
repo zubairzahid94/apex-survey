@@ -1,4 +1,4 @@
-
+// @ts-nocheck
 "use client";
 
 import Counter from "@/components/Counter";
@@ -31,6 +31,7 @@ import { useForm } from "react-hook-form";
 import type { z } from "zod";
 import axios from "axios"
 import toast, { Toaster } from 'react-hot-toast';
+import LoadingBounce from "@/components/loading";
 
 //TODO: This page is having a lot of repeated code from the instant Quote Modal. So try to reuse that code instead of just copying pasting it here
 
@@ -42,23 +43,23 @@ const OrderNow = () => {
   });
 
   const [subFields, setSubFields] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false); // State for loading
 
   async function onSubmit(data: z.infer<typeof InstantQuoteSchema>) {
     try {
+      setLoading(true); // Set loading to true before API call
       const response = await axios.post('/api/order', data);
       const orderId = response.data.id;
-
       form.reset();
       setSubFields([]);
       toast.success("Quote Added moving to Checkout")
       router.push(`/checkout?orderId=${orderId}`);
-      // router.push("/checkout");
-
     } catch (error: any) {
-      // toast.error("Something went wrong", error);
-      toast.success("Unsuccessful")
+      console.error('Error submitting order:', error);
+      toast.error("Unsuccessful")
+    } finally {
+      setLoading(false); // Set loading to false after API call
     }
-
   }
 
   const handleChangeInPropertyType = (
@@ -310,9 +311,21 @@ const OrderNow = () => {
       {form.watch("propertyType") && form.watch("services") && (
         <Button
           type="submit"
-          className="w-full text-white p-2 bg-apex-blue hover:bg-apex-blue"
+          className="w-full text-white p-2 bg-apex-blue hover:bg-apex-blue relative"
+          disabled={loading} // Disable button while loading
         >
-          Place Order
+          {loading && ( // Show loader if loading is true
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="flex flex-row gap-2">
+                <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce" />
+                <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.3s]" />
+                <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.5s]" />
+              </div>
+            </div>
+          )}
+          <span className={loading ? "opacity-0" : "opacity-100"}>
+            Place Order
+          </span>
         </Button>
       )}
     </form>

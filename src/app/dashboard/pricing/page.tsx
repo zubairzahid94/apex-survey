@@ -12,7 +12,11 @@ import {
 import Link from 'next/link';
 
 const ServicesPage = async () => {
-  const services = await prisma.pricing.findMany({});
+  const services = await prisma.pricing.findMany({
+    orderBy: {
+      createdAt: "desc"
+    }
+  });
   const countServices = services.length.toString();
 
   return (

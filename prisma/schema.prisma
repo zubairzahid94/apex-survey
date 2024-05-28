@@ -68,6 +68,8 @@ enum ContactType {
 
 model Checkout {
   id            String        @id @default(uuid()) @map("_id")
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
   contactType   ContactType
   contactName   String?
   contactEmail  String?
@@ -91,10 +93,13 @@ model Checkout {
   acceptTos     Boolean
   quoteId       String        @unique
   quote         InstantQuote? @relation(fields: [quoteId], references: [id])
+  status        String        @default("Pending")
 }
 
 model Pricing {
   id          String   @id @default(uuid()) @map("_id")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   serviceName String
   pricing     String
   surveyType  String[] // Changed to an array of strings

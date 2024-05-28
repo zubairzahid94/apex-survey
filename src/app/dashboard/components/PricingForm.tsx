@@ -86,24 +86,31 @@ const PricingForm = () => {
                     )}
                 </div>
             </div>
+            <div className="space-y-2">
+                <Label htmlFor="predefinedSurveyTypes" className="!text-para">
+                    Survey Types
+                </Label>
+                <div className="flex flex-wrap items-center gap-2">
+                    {predefinedSurveyTypes.map((type) => (
+                        <Button
+                            key={type}
+                            type="button"
+                            size={"lg"}
+                            onClick={() => handleAddSurveyType(type)}
+                            className="text-btn p-2 rounded-3xl text-white bg-apex-blue hover:bg-apex-blue"
+                        >
+                            {type}
+                        </Button>
+                    ))}
+                </div>
+            </div>
 
             <div className="space-y-2">
                 <Label htmlFor="surveyType" className="!text-para">
-                    Survey Type
+                    Custom Survey Type
                 </Label>
                 <div className="flex flex-wrap items-center gap-2">
-                    {surveyTypes.map((type) => (
-                        <div key={type} className="bg-blue-500 text-white rounded-full py-1 px-3 flex items-center justify-center">
-                            <span>{type}</span>
-                            <button
-                                type="button"
-                                className="ml-2 text-white hover:text-gray-200"
-                                onClick={() => handleRemoveSurveyType(type)}
-                            >
-                                &times;
-                            </button>
-                        </div>
-                    ))}
+
                     <Input
                         id="customSurveyType"
                         value={customSurveyType}
@@ -118,24 +125,21 @@ const PricingForm = () => {
                     >
                         Add
                     </Button>
-                </div>
-                <div className="space-y-2">
-                    <Label htmlFor="predefinedSurveyTypes" className="!text-para">
-                        Predefined Survey Types
-                    </Label>
-                    <div className="flex flex-wrap items-center gap-2">
-                        {predefinedSurveyTypes.map((type) => (
-                            <Button
-                                key={type}
+                    <br />
+                    {surveyTypes.map((type) => (
+                        <div key={type} className="bg-blue-500 text-white rounded-full py-1 px-3 flex items-center justify-center">
+                            <span>{type}</span>
+                            <button
                                 type="button"
-                                onClick={() => handleAddSurveyType(type)}
-                                className="text-btn p-2 text-white bg-apex-blue hover:bg-apex-blue"
+                                className="ml-2 text-white hover:text-gray-200"
+                                onClick={() => handleRemoveSurveyType(type)}
                             >
-                                {type}
-                            </Button>
-                        ))}
-                    </div>
+                                &times;
+                            </button>
+                        </div>
+                    ))}
                 </div>
+
             </div>
 
             <Button type="submit" className="text-btn p-2 text-white bg-apex-blue hover:bg-apex-blue w-full text-center">

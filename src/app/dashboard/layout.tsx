@@ -1,8 +1,8 @@
-import React from "react";
+import type React from "react";
 import Sidebar from "./components/Sidebar";
 import DashboardHeader from "./components/DashboardHeader";
 import DashboardFooter from "./components/DashboardFooter";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Dashboard - Apex Survey",
