@@ -1,6 +1,8 @@
+//@ts-nocheck
 // Assuming this file is named checkout.ts and located in pages/api/checkout.ts
 import { NextResponse } from "next/server";
 import { prisma } from "../../../../../lib/db";
+import { update } from "@/lib/action";
 
 export async function POST(
 	req: Request,
@@ -36,7 +38,7 @@ export async function POST(
 				quoteId: quoteId,
 			},
 		});
-
+		update(["/dashboard/quotes"]);
 		return NextResponse.json(checkout);
 	} catch (error) {
 		console.error("Checkout error:", error);

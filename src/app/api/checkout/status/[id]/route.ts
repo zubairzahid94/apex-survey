@@ -1,7 +1,8 @@
 //@ts-nocheck
 import { NextResponse } from "next/server";
-import { prisma } from "../../../../../lib/db";
+import { prisma } from "../../../../../../lib/db";
 import { update } from "@/lib/action";
+import { revalidatePath } from "next/cache";
 
 export async function PUT(
 	req: Request,
@@ -12,13 +13,12 @@ export async function PUT(
 		const requestData = await req.json();
 		const { status } = requestData;
 
-		const updatedPricing = await prisma.pricing.update({
+		const updatedStatus = await prisma.checkout.update({
 			where: { id },
 			data: { status },
 		});
-		update(["/dashboard/pricing"]);
-		update(["/"]);
-		return NextResponse.json(updatedPricing);
+		update(["/dashboard/quotes"]);
+		return NextResponse.json(updatedStatus);
 	} catch (error) {
 		console.error("Error updating status:", error);
 		return new NextResponse("Internal server error", { status: 500 });

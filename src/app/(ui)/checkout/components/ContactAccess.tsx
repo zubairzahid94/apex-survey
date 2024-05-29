@@ -1,16 +1,11 @@
+// @ts-nocheck
 "use client";
-
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import React, { useState, useEffect } from "react";
+import type { UseFormReturn } from "react-hook-form";
+import type { checkoutSchema } from "@/lib/schema";
+import type { z } from "zod";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ChevronDown, CircleAlert } from "lucide-react";
-import React from "react";
-import { UseFormReturn } from "react-hook-form";
-import { checkoutSchema } from "@/lib/schema";
-import { z } from "zod";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -21,9 +16,7 @@ type ContactAccessProps = {
 };
 
 const ContactAccess = ({ form }: ContactAccessProps) => {
-  const radioOptions: z.infer<
-    typeof checkoutSchema
-  >["contactAccess"]["type"][] = [
+  const radioOptions: z.infer<typeof checkoutSchema>["contactAccess"]["type"][] = [
     "me",
     "Seller",
     "Buyer",
@@ -33,13 +26,20 @@ const ContactAccess = ({ form }: ContactAccessProps) => {
     "Other",
   ];
 
-  const [contactType, setContactType] = React.useState(radioOptions[0]);
+  const [contactType, setContactType] = React.useState(radioOptions[1]);
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  useEffect(() => {
+    if (form.formState.errors.contactAccess) {
+      setIsOpen(true);
+    }
+  }, [form.formState.errors.contactAccess]);
 
   return (
-    <Accordion type="multiple" defaultValue={[]} className="bg-white px-4 py-0">
+    <Accordion type="single" value={isOpen ? "item-1" : ""} onValueChange={(value) => setIsOpen(value === "item-1")} className="bg-white px-4 py-0">
       <AccordionItem value="item-1" className="border-b-0 justify-start py-0">
         <AccordionTrigger>
-          <div className="flex flex-row gap-4 items-center  ">
+          <div className="flex flex-row gap-4 items-center">
             <CircleAlert className="size-6 shrink-0 transform-none" />
             <h5 className="text-para !font-semibold hover:no-underline text-start">
               Contact For Access
@@ -57,6 +57,13 @@ const ContactAccess = ({ form }: ContactAccessProps) => {
             onValueChange={(e: (typeof radioOptions)[number]) => {
               setContactType(e);
               form.setValue("contactAccess.type", e);
+              // Reset values of other fields when "Me" is selected
+              if (e === "me") {
+                form.setValue("contactAccess.name", "null");
+                form.setValue("contactAccess.phoneNumber1", "00000");
+                form.setValue("contactAccess.email", "me@gmail.com");
+                form.setValue("contactAccess.phoneNumber2", "00000");
+              }
             }}
             className="w-full flex flex-wrap gap-4 lg:justify-between items-center"
           >
@@ -80,7 +87,15 @@ const ContactAccess = ({ form }: ContactAccessProps) => {
                   <Label htmlFor="name">{`${form.getValues(
                     "contactAccess.type"
                   )} Name`}</Label>
-                  <Input id="name" {...form.register("contactAccess.name")} />
+                  <Input
+                    id="name"
+                    {...form.register("contactAccess.name", {
+                      required: "Name is required",
+                    })}
+                  />
+                  <Error
+                    message={form.formState.errors.contactAccess?.name?.message}
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="phone1">{`${form.getValues(
@@ -88,7 +103,14 @@ const ContactAccess = ({ form }: ContactAccessProps) => {
                   )} Phone number 1`}</Label>
                   <Input
                     id="phone1"
-                    {...form.register("contactAccess.phoneNumber1")}
+                    {...form.register("contactAccess.phoneNumber1", {
+                      required: "Phone number 1 is required",
+                    })}
+                  />
+                  <Error
+                    message={
+                      form.formState.errors.contactAccess?.phoneNumber1?.message
+                    }
                   />
                 </div>
               </div>
@@ -97,7 +119,19 @@ const ContactAccess = ({ form }: ContactAccessProps) => {
                   <Label htmlFor="email">{`${form.getValues(
                     "contactAccess.type"
                   )} Email`}</Label>
-                  <Input id="email" {...form.register("contactAccess.email")} />
+                  <Input
+                    id="email"
+                    {...form.register("contactAccess.email", {
+                      required: "Email is required",
+                      pattern: {
+                        value: /\S+@\S+\.\S+/,
+                        message: "Invalid email address",
+                      },
+                    })}
+                  />
+                  <Error
+                    message={form.formState.errors.contactAccess?.email?.message}
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="phone2">{`${form.getValues(
@@ -105,7 +139,14 @@ const ContactAccess = ({ form }: ContactAccessProps) => {
                   )} Phone number 2`}</Label>
                   <Input
                     id="phone2"
-                    {...form.register("contactAccess.phoneNumber2")}
+                    {...form.register("contactAccess.phoneNumber2", {
+                      required: "Phone number 2 is required",
+                    })}
+                  />
+                  <Error
+                    message={
+                      form.formState.errors.contactAccess?.phoneNumber2?.message
+                    }
                   />
                 </div>
               </div>
