@@ -1,14 +1,14 @@
-// @ts-nocheck 
-'use client'
+//@ts-nocheck
+'use client';
 import React, { useState } from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { PricingSchema } from '@/lib/schema';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import Error from '@/components/Error';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import type { Pricing } from '@prisma/client';
+import { update } from '@/lib/action';
 
 const predefinedSurveyTypes = [
     "Survey Construction Report",
@@ -16,15 +16,19 @@ const predefinedSurveyTypes = [
     "Engineering Support Report",
 ];
 
-const PricingForm = () => {
-    const [serviceName, setServiceName] = useState('');
-    const [pricing, setPricing] = useState('');
+interface PricingProps {
+    pricing: Pricing,
+}
+
+const EditPricingForm = ({ pricing: initialPricing }: PricingProps) => {
+    const [serviceName, setServiceName] = useState(initialPricing.serviceName || '');
+    const [pricing, setPricing] = useState(initialPricing.pricing || '');
     const [customSurveyType, setCustomSurveyType] = useState('');
-    const [surveyTypes, setSurveyTypes] = useState<string[]>([]);
+    const [surveyType, setSurveyTypes] = useState<string[]>(initialPricing.surveyType || []);
     const [loading, setLoading] = useState(false);
 
     const handleAddSurveyType = (type: string) => {
-        if (type.trim() !== '' && !surveyTypes.includes(type.trim())) {
+        if (type.trim() !== '' && !surveyType.includes(type.trim())) {
             setSurveyTypes((prev) => [...prev, type.trim()]);
         }
     };
@@ -35,30 +39,28 @@ const PricingForm = () => {
 
     const onSubmit = async (e) => {
         setLoading(true);
+        e.preventDefault();
         try {
-            e.preventDefault();
-
             const data = {
                 serviceName,
                 pricing,
-                surveyType: surveyTypes,
+                surveyType,
             };
 
-            await axios.post('/api/services', data);
-            toast.success("Service added");
+            await axios.put(`/api/services/${initialPricing.id}`, data);
             update(["/dashboard/pricing"]);
             update(["/"]);
-
+            toast.success("Service updated successfully");
         } catch (error) {
-            console.error('Error submitting form:', error);
-        }
-        finally {
+            console.error('Error updating service:', error);
+            toast.error("Failed to update service");
+        } finally {
             setLoading(false); // Set loading to false when API request finishes
         }
     };
 
     return (
-        <form onSubmit={(e) => onSubmit(e)} className="space-y-4">
+        <form onSubmit={onSubmit} className="space-y-4">
             <div className="flex gap-4 items-center">
                 <div className="flex-1">
                     <Label htmlFor="serviceName" className="!text-para">
@@ -115,7 +117,6 @@ const PricingForm = () => {
                     Custom Survey Type
                 </Label>
                 <div className="flex flex-wrap items-center gap-2">
-
                     <Input
                         id="customSurveyType"
                         value={customSurveyType}
@@ -131,7 +132,7 @@ const PricingForm = () => {
                         Add
                     </Button>
                     <br />
-                    {surveyTypes.map((type) => (
+                    {surveyType.map((type) => (
                         <div key={type} className="bg-blue-500 text-white rounded-full py-1 px-3 flex items-center justify-center">
                             <span>{type}</span>
                             <button
@@ -158,11 +159,11 @@ const PricingForm = () => {
                     </div>
                 )}
                 <span className={loading ? "opacity-0" : "opacity-100"}>
-                    Submit
+                    Update
                 </span>
             </Button>
         </form>
     );
 };
 
-export default PricingForm;
+export default EditPricingForm;

@@ -4,6 +4,7 @@
 import { Button } from "@/components/ui/button";
 import type { Pricing } from "@prisma/client";
 import {
+    Edit,
     LucideChevronDown,
     LucideChevronLeft,
     LucideChevronRight,
@@ -41,6 +42,17 @@ const ServicesTable = ({ services: initialServices, countServices }: ServicesPro
             setLoading(false); // Set loading to false when API request finishes
         }
     };
+    const handleEditClick = async (id: string) => {
+        try {
+            setLoading(true); // Set loading to true when API request starts
+            router.push(`/dashboard/addpricing/${id}`)
+            toast.success("Redirecting to the edit page...")
+        } catch (error) {
+            console.error('Error Editing pricing item:', error);
+        } finally {
+            setLoading(false); // Set loading to false when API request finishes
+        }
+    };
 
     const handleStatusChange = async (id: string, currentStatus: string) => {
         try {
@@ -52,7 +64,6 @@ const ServicesTable = ({ services: initialServices, countServices }: ServicesPro
                 service.id === id ? { ...service, status: updatedStatus } : service
             ));
             toast.success(`Service ${updatedStatus}`)
-            update(["/dashboard/pricing"]);
         } catch (error) {
             console.error('Error updating status:', error);
         } finally {
@@ -64,30 +75,20 @@ const ServicesTable = ({ services: initialServices, countServices }: ServicesPro
         <section className="w-full px-4 py-6 flex flex-col gap-4 rounded-xl bg-white">
             <div className="flex items-center justify-between w-full">
                 <p className="text-btn">{countServices} Results</p>
-                <div className="flex gap-3 items-center">
-                    <p className="text-btn">1 of 1</p>
-                    <Button className="bg-transparent hover:bg-transparent p-2 text-btn text-black rounded-lg">
-                        <LucideChevronLeft className="size-6" />
-                    </Button>
-                    <Button className="bg-transparent hover:bg-transparent p-2 text-btn text-black rounded-lg">
-                        <LucideChevronRight className="size-6" />
-                    </Button>
-                    <Button className="text-black text-btn flex gap-2 bg-transparent hover:bg-transparent">
-                        <Image
-                            src={"/icons/filter.svg"}
-                            alt="filter icon"
-                            width={16}
-                            height={16}
-                        />
-                        <p className="text-btn">Filter</p>
-                        <LucideChevronDown className="size-6" />
-                    </Button>
-                </div>
+
             </div>
 
             <div className="overflow-x-auto">
                 {loading ? (
-                    <LoadingBounce /> // Display loader when loading is true
+
+                    <div className='w-full px-4 py-6 flex justify-center items-center gap-4 rounded-xl bg-white'>
+                        <span className='sr-only'>Loading...</span>
+                        <div className='h-8 w-8 bg-blue-600 rounded-full animate-bounce [animation-delay:-0.3s]' />
+                        <div className='h-8 w-8 bg-blue-600 rounded-full animate-bounce [animation-delay:-0.15s]' />
+                        <div className='h-8 w-8 bg-blue-600 rounded-full animate-bounce' />
+                    </div>
+                    // Display loader when loading is true
+
                 ) : (
                     <table className="w-full mx-auto space-y-4">
                         <thead className="w-full mb-2">
@@ -97,6 +98,8 @@ const ServicesTable = ({ services: initialServices, countServices }: ServicesPro
                                 <th className="text-center col-span-3 md:col-span-2">Description</th>
                                 <th className="text-center col-span-2 md:col-span-2">Status</th>
                                 <th className="text-center col-span-1">Action</th>
+                                <th className="text-center col-span-1">Edit</th>
+
                             </tr>
                         </thead>
 
@@ -121,6 +124,14 @@ const ServicesTable = ({ services: initialServices, countServices }: ServicesPro
                                             onClick={() => handleDeleteClick(service.id)}
                                         >
                                             <Trash className="size-5" />
+                                        </Button>
+                                    </td>
+                                    <td className="text-center col-span-1">
+                                        <Button
+                                            className="text-btn text-black bg-white rounded-md p-2 hover:bg-gray-100"
+                                            onClick={() => handleEditClick(service.id)}
+                                        >
+                                            <Edit className="size-5" />
                                         </Button>
                                     </td>
                                 </tr>
