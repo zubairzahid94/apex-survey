@@ -29,11 +29,9 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import type { z } from "zod";
-import axios from "axios"
-import toast, { Toaster } from 'react-hot-toast';
-import LoadingBounce from "@/components/loading";
-
-//TODO: This page is having a lot of repeated code from the instant Quote Modal. So try to reuse that code instead of just copying pasting it here
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+import Error from "@/components/Error";
 
 const OrderNow = () => {
   const router = useRouter();
@@ -44,42 +42,35 @@ const OrderNow = () => {
 
   const [subFields, setSubFields] = useState<string[]>([]);
   const [loading, setLoading] = useState(false); // State for loading
+  const [hasSubmitted, setHasSubmitted] = useState(false); // State to track if the form has been submitted
 
   async function onSubmit(data: z.infer<typeof InstantQuoteSchema>) {
     try {
       setLoading(true); // Set loading to true before API call
-      const response = await axios.post('/api/order', data);
+      const response = await axios.post("/api/order", data);
       const orderId = response.data.id;
       form.reset();
       setSubFields([]);
-      toast.success("Quote Added moving to Checkout")
+      toast.success("Quote Added moving to Checkout");
       router.push(`/checkout?orderId=${orderId}`);
     } catch (error: any) {
-      console.error('Error submitting order:', error);
-      toast.error("Unsuccessful")
+      console.error("Error submitting order:", error);
+      toast.error("Unsuccessful");
     } finally {
       setLoading(false); // Set loading to false after API call
+      setHasSubmitted(true); // Set hasSubmitted to true after form submission attempt
     }
   }
 
-  const handleChangeInPropertyType = (
-    checked: CheckedState,
-    itemId: string
-  ) => {
+  const handleChangeInPropertyType = (checked: CheckedState, itemId: string) => {
     if (checked) {
-      form.setValue(
-        "propertyType",
-        itemId as z.infer<typeof InstantQuoteSchema>["propertyType"]
-      );
+      form.setValue("propertyType", itemId as z.infer<typeof InstantQuoteSchema>["propertyType"]);
       setSubFields([]);
       form.setValue("services", []);
     }
   };
 
-  const handleChangeInService = (
-    checked: CheckedState,
-    item: z.infer<typeof InstantQuoteSchema>["services"][number]
-  ) => {
+  const handleChangeInService = (checked: CheckedState, item: z.infer<typeof InstantQuoteSchema>["services"][number]) => {
     if (checked) {
       form.setValue(
         "services",
@@ -93,7 +84,6 @@ const OrderNow = () => {
         "services",
         form.watch("services")?.filter((value) => value.id !== item.id)
       );
-      //filter out subfields of the current item from subFields array
       setSubFields([]);
     }
   };
@@ -196,6 +186,12 @@ const OrderNow = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form.watch("services")]);
 
+  const allErrors = () => {
+    return Object.values(form.formState.errors).map((error) => (
+      <Error key={error.message} message={error.message ?? ""} />
+    ));
+  };
+
   return (
     <form
       onSubmit={form.handleSubmit(onSubmit)}
@@ -205,37 +201,40 @@ const OrderNow = () => {
         <Label htmlFor="propertyType" className="!text-h5 text-center">
           Select Property Type:
         </Label>
-        {form.getFieldState("propertyType").error && (
-          <p className="text-red-500 text-small">
-            {form.getFieldState("propertyType").error?.message}
-          </p>
-        )}
-        <div className="flex flex-col md:flex-row gap-4 items-center w-full">
-          {propertyType.map((item) => (
-            <Checkbox
-              key={item.id}
-              id={item.id}
-              value={item.id}
-              checked={form.watch("propertyType") === item.id}
-              onCheckedChange={(checked) =>
-                handleChangeInPropertyType(checked, item.id)
-              }
-              className="bg-transparent data-[state=checked]:text-white data-[state=checked]:bg-apex-blue border border-gray-200 flex items-center justify-between p-3 w-full md:w-1/2"
-            >
-              <Label
-                className="w-full flex flex-col gap-2 items-center p-4"
-                htmlFor={item.id}
+        <div className="space-y-2">
+          {form.getFieldState("propertyType").error && (
+            <Error message={form.getFieldState("propertyType").error?.message ?? ""} />
+          )}
+          {form.formState.errors.propertyType && (
+            <Error message={form.formState.errors.propertyType.message ?? ""} />
+          )}
+          <div className="flex flex-col md:flex-row gap-4 items-center w-full">
+            {propertyType.map((item) => (
+              <Checkbox
+                key={item.id}
+                id={item.id}
+                value={item.id}
+                checked={form.watch("propertyType") === item.id}
+                onCheckedChange={(checked) =>
+                  handleChangeInPropertyType(checked, item.id)
+                }
+                className="bg-transparent data-[state=checked]:text-white data-[state=checked]:bg-apex-blue border border-gray-200 flex items-center justify-between p-3 w-full md:w-1/2"
               >
-                {item.icon}
-                <h5 className="text-para sm:text-h5 font-bold">{item.label}</h5>
-                <p className="text-small">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Quidem aut incidunt officiis ipsum pariatur nihil delectus
-                  rerum, dolores magni sapiente?
-                </p>
-              </Label>
-            </Checkbox>
-          ))}
+                <Label
+                  className="w-full flex flex-col gap-2 items-center p-4"
+                  htmlFor={item.id}
+                >
+                  {item.icon}
+                  <h5 className="text-para sm:text-h5 font-bold">{item.label}</h5>
+                  <p className="text-small">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Quidem aut incidunt officiis ipsum pariatur nihil delectus
+                    rerum, dolores magni sapiente?
+                  </p>
+                </Label>
+              </Checkbox>
+            ))}
+          </div>
         </div>
       </div>
       {form.watch("propertyType") && (
@@ -243,39 +242,39 @@ const OrderNow = () => {
           <Label htmlFor="services" className="!text-h5 text-center">
             Select Your Services:
           </Label>
-          {form.getFieldState("services").error && (
-            <p className="text-red-500 text-small">
-              {form.getFieldState("services").error?.message}
-            </p>
-          )}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-            {services
-              .filter((service) =>
-                service.servicePropertyType.includes(form.watch("propertyType"))
-              )
-              .map((item) => (
-                <Checkbox
-                  key={item.id}
-                  id={item.id}
-                  value={item.id}
-                  checked={form
-                    .watch("services")
-                    ?.some((value) => value.id === item.id)}
-                  onCheckedChange={(checked) =>
-                    handleChangeInService(checked, item)
-                  }
-                  className="bg-transparent data-[state=checked]:text-white data-[state=checked]:bg-apex-blue border border-gray-200 flex items-center justify-between p-3"
-                >
-                  <Label
-                    className="w-full flex flex-row gap-2 items-center"
-                    htmlFor={item.id}
+          <div className="space-y-2">
+            {form.formState.errors.services && (
+              <Error message={form.formState.errors.services.message ?? ""} />
+            )}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+              {services
+                .filter((service) =>
+                  service.servicePropertyType.includes(form.watch("propertyType"))
+                )
+                .map((item) => (
+                  <Checkbox
+                    key={item.id}
+                    id={item.id}
+                    value={item.id}
+                    checked={form
+                      .watch("services")
+                      ?.some((value) => value.id === item.id)}
+                    onCheckedChange={(checked) =>
+                      handleChangeInService(checked, item)
+                    }
+                    className="bg-transparent data-[state=checked]:text-white data-[state=checked]:bg-apex-blue border border-gray-200 flex items-center justify-between p-3"
                   >
-                    <p className="text-small font-medium text-start">
-                      {item.label}
-                    </p>
-                  </Label>
-                </Checkbox>
-              ))}
+                    <Label
+                      className="w-full flex flex-row gap-2 items-center"
+                      htmlFor={item.id}
+                    >
+                      <p className="text-small font-medium text-start">
+                        {item.label}
+                      </p>
+                    </Label>
+                  </Checkbox>
+                ))}
+            </div>
           </div>
         </div>
       )}
@@ -288,31 +287,33 @@ const OrderNow = () => {
                 <Label htmlFor={item.id} className="!text-btn">
                   Select {item.label}:
                 </Label>
-                {form.getFieldState(item.id).error && (
-                  <p className="text-red-500 text-small">
-                    {form.getFieldState(item.id).error?.message}
-                  </p>
-                )}
-                <div
-                  className={cn(
-                    "grid gap-4 w-full",
-                    item.fieldType === "counter" || item.fieldType === "dropdown"
-                      ? "grid-cols-1"
-                      : "grid-cols-1 md:grid-cols-2"
+                <div className="space-y-2">
+                  {form.getFieldState(item.id).error && (
+                    <Error message={form.getFieldState(item.id).error?.message ?? ""} />
                   )}
-                >
-                  {renderSubFieldsOptions(item)}
+                  <div
+                    className={cn(
+                      "grid gap-4 w-full",
+                      item.fieldType === "counter" || item.fieldType === "dropdown"
+                        ? "grid-cols-1"
+                        : "grid-cols-1 md:grid-cols-2"
+                    )}
+                  >
+                    {renderSubFieldsOptions(item)}
+                  </div>
                 </div>
               </div>
               <hr className="my-4 w-full bg-apex-grey-light" />
             </React.Fragment>
           );
         })}
+      {hasSubmitted && allErrors()} {/* Show all errors above the button after form submission attempt */}
       {form.watch("propertyType") && form.watch("services") && (
         <Button
           type="submit"
           className="w-full text-white p-2 bg-apex-blue hover:bg-apex-blue relative"
           disabled={loading} // Disable button while loading
+          onClick={() => { setHasSubmitted(true); }}
         >
           {loading && ( // Show loader if loading is true
             <div className="absolute inset-0 flex items-center justify-center">

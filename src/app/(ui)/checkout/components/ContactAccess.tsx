@@ -1,6 +1,6 @@
 // @ts-nocheck
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import type { UseFormReturn } from "react-hook-form";
 import type { checkoutSchema } from "@/lib/schema";
 import type { z } from "zod";
@@ -27,14 +27,19 @@ const ContactAccess = ({ form }: ContactAccessProps) => {
   ];
 
   const [contactType, setContactType] = React.useState(radioOptions[1]);
+  const [isOpen, setIsOpen] = React.useState(false);
 
-
+  useEffect(() => {
+    if (form.formState.errors.contactAccess) {
+      setIsOpen(true);
+    }
+  }, [form.formState.errors.contactAccess]);
 
   return (
-    <Accordion type="multiple" defaultValue={[]} className="bg-white px-4 py-0">
-      <AccordionItem value="item-1" className="border-b-0 justify-start py-0 " >
+    <Accordion type="single" value={isOpen ? "item-1" : ""} onValueChange={(value) => setIsOpen(value === "item-1")} className="bg-white px-4 py-0">
+      <AccordionItem value="item-1" className="border-b-0 justify-start py-0">
         <AccordionTrigger>
-          <div className="flex flex-row gap-4 items-center  ">
+          <div className="flex flex-row gap-4 items-center">
             <CircleAlert className="size-6 shrink-0 transform-none" />
             <h5 className="text-para !font-semibold hover:no-underline text-start">
               Contact For Access
@@ -154,4 +159,3 @@ const ContactAccess = ({ form }: ContactAccessProps) => {
 };
 
 export default ContactAccess;
-
