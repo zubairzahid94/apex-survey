@@ -10,6 +10,7 @@ import axios from 'axios';
 import { toast } from "react-hot-toast"
 import { update } from "@/lib/action";
 import LoadingBounce from "@/components/loading";
+import './print.css';
 
 interface CheckoutProps {
     checkouts: (Checkout & { quote: InstantQuote & { services: Service[] } })[];
@@ -20,7 +21,6 @@ const UserDetails = ({ checkouts }: CheckoutProps) => {
     const [status, setStatus] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
 
-
     const handleStatus = async (id: string, newStatus: string) => {
         try {
             setLoading(true);
@@ -29,30 +29,24 @@ const UserDetails = ({ checkouts }: CheckoutProps) => {
             toast.success(`Status ${newStatus}`);
             update(["/dashboard/quotes"]);
             route.push("/dashboard/quotes");
-
         } catch (error) {
             console.error('Error updating status:', error);
-        }
-        finally {
+        } finally {
             setLoading(false); // Set loading to false when API request finishes
         }
     };
-
 
     const handlePrint = () => {
         window.print();
     };
 
     return (
-
-        <div className="h-full overflow-y-scroll space-y-4 no-scrollbar pr-4">
-            {loading ? ( // Conditionally render the loader if loading is true
-
+        <div className="print-container h-full overflow-y-scroll space-y-4 no-scrollbar pr-4">
+            {loading ? (
                 <LoadingBounce />
-
             ) : (
                 <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
-                    <Card className="flex-1 p-4 shadow-none">
+                    <Card className=" flex-1 p-4 shadow-none">
                         <div className="space-y-4">
                             <h5 className="text-btn">User Details</h5>
                             {checkouts && (
@@ -110,10 +104,6 @@ const UserDetails = ({ checkouts }: CheckoutProps) => {
                                                 </div>
                                             </>
                                         )}
-
-                                        {/* Display other checkouts details */}
-
-
                                     </dl>
                                 </div>
                             )}
@@ -123,7 +113,12 @@ const UserDetails = ({ checkouts }: CheckoutProps) => {
                     {checkouts && (
                         <Card className="flex-1 p-4 shadow-none">
                             <div className="space-y-4">
-                                <h5 className="text-btn">Quote Details</h5>
+                                <div className="flex justify-between items-center mb-4">
+                                    <h5 className="text-btn">Quote Details</h5>
+                                    <Button variant={"secondary"} onClick={handlePrint} className=" print-hide text-sm px-4 py-2">
+                                        Print
+                                    </Button>
+                                </div>
                                 <div className="flow-root">
                                     <dl className="-my-3 divide-y divide-gray-100 text-sm">
                                         <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
@@ -145,29 +140,27 @@ const UserDetails = ({ checkouts }: CheckoutProps) => {
                                             <dt className="font-medium text-gray-900">Consumer Units</dt>
                                             <dd className="text-gray-700 sm:col-span-2">{checkouts.quote?.consumerUnits}</dd>
                                         </div>
-
-                                        {/* Display other quote details */}
-
-
+                                        <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                                            <dt className="font-medium text-gray-900">Status</dt>
+                                            <dd className="text-gray-700 sm:col-span-2">{checkouts.status === 'Accepted' ? (
+                                                <span className="px-2 py-1 bg-green-200 text-green-800 rounded-md">Accepted</span>
+                                            ) : checkouts.status === 'Declined' ? (
+                                                <span className="px-2 py-1 bg-red-200 text-red-800 rounded-md">Declined</span>
+                                            ) : (
+                                                <span className="px-2 py-1 bg-gray-200 text-gray-800 rounded-md">Pending</span>
+                                            )}</dd>
+                                        </div>
                                     </dl>
-                                    <div className='flex flex-row justify-between mt-4 items-center gap-4 '>
-                                        <Button variant={"secondary"} onClick={handlePrint}>Print</Button>
-                                        <Button variant={"default"} onClick={() => handleStatus(checkouts.id, 'Accepted')}>Accept</Button>
-                                        <Button variant={"destructive"} onClick={() => handleStatus(checkouts.id, 'Declined')}>Decline</Button>
-                                    </div>
-                                    <div className="flex items-center mt-4">
-                                        <p className="mr-2 font-medium">Status:</p>
-                                        {checkouts.status === 'Accepted' ? (
-                                            <span className="px-2 py-1 bg-green-200 text-green-800 rounded-md">Accepted</span>
-                                        ) : checkouts.status === 'Declined' ? (
-                                            <span className="px-2 py-1 bg-red-200 text-red-800 rounded-md">Declined</span>
-                                        ) : (
-                                            <span className="px-2 py-1 bg-gray-200 text-gray-800 rounded-md">Pending</span>
-                                        )}
+                                    <div className="flex justify-center space-x-4 mt-4">
+                                        <Button variant={"default"} onClick={() => handleStatus(checkouts.id, 'Accepted')} className="bg-green-500 print-hide text-white hover:bg-green-600">
+                                            Accept
+                                        </Button>
+                                        <Button variant={"destructive"} onClick={() => handleStatus(checkouts.id, 'Declined')} className="bg-red-500 print-hide text-white hover:bg-red-600">
+                                            Decline
+                                        </Button>
                                     </div>
 
                                 </div>
-
                             </div>
                         </Card>
                     )}

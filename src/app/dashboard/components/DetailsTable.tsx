@@ -18,17 +18,7 @@ const DetailsTable = ({ checkouts, countCheckouts }: CheckoutProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [filterStatus, setFilterStatus] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
-  const [latestEntryId, setLatestEntryId] = useState(null);
   const itemsPerPage = 5;
-
-  useEffect(() => {
-    if (checkouts.length > 0) {
-      const latestEntry = checkouts.reduce((latest, entry) => {
-        return new Date(entry.updatedAt) > new Date(latest.updatedAt) ? entry : latest;
-      }, checkouts[0]);
-      setLatestEntryId(latestEntry.id);
-    }
-  }, [checkouts]);
 
   const handleDetailClick = (id: string) => {
     router.push(`/dashboard/quotes/${id}`);
@@ -120,7 +110,7 @@ const DetailsTable = ({ checkouts, countCheckouts }: CheckoutProps) => {
             {currentCheckouts.map((order) => (
               <tr
                 key={order.id}
-                className={`grid grid-cols-12 md:grid-cols-12 gap-2 items-center ${order.id === latestEntryId ? "bg-gray-100 rounded-lg border-gray-200" : ""}`}
+                className={`grid grid-cols-12 md:grid-cols-12 gap-2 items-center ${order.status === "Pending" ? "bg-gray-100 rounded-lg border-gray-200" : ""}`}
               >
                 <td className="text-center col-span-1">
                   <Checkbox className="size-4 mx-auto" />

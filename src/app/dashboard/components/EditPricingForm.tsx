@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 import type { Pricing } from '@prisma/client';
 import { update } from '@/lib/action';
+import { useRouter } from 'next/navigation';
 
 const predefinedSurveyTypes = [
     "Survey Construction Report",
@@ -21,6 +22,7 @@ interface PricingProps {
 }
 
 const EditPricingForm = ({ pricing: initialPricing }: PricingProps) => {
+    const route = useRouter();
     const [serviceName, setServiceName] = useState(initialPricing.serviceName || '');
     const [pricing, setPricing] = useState(initialPricing.pricing || '');
     const [customSurveyType, setCustomSurveyType] = useState('');
@@ -49,8 +51,9 @@ const EditPricingForm = ({ pricing: initialPricing }: PricingProps) => {
 
             await axios.put(`/api/services/${initialPricing.id}`, data);
             update(["/dashboard/pricing"]);
-            update(["/"]);
+            update(["/(ui)/(home)"]);
             toast.success("Service updated successfully");
+            route.push("/dashboard/pricing")
         } catch (error) {
             console.error('Error updating service:', error);
             toast.error("Failed to update service");

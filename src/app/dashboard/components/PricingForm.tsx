@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import Error from '@/components/Error';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const predefinedSurveyTypes = [
     "Survey Construction Report",
@@ -17,6 +18,7 @@ const predefinedSurveyTypes = [
 ];
 
 const PricingForm = () => {
+    const route = useRouter()
     const [serviceName, setServiceName] = useState('');
     const [pricing, setPricing] = useState('');
     const [customSurveyType, setCustomSurveyType] = useState('');
@@ -46,8 +48,10 @@ const PricingForm = () => {
 
             await axios.post('/api/services', data);
             toast.success("Service added");
+            route.push("/dashboard/pricing")
             update(["/dashboard/pricing"]);
             update(["/"]);
+
 
         } catch (error) {
             console.error('Error submitting form:', error);

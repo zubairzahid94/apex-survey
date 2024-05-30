@@ -25,7 +25,7 @@ const Quotes = async () => {
       },
     },
     orderBy: {
-      updatedAt: "desc"
+      createdAt: "desc"
     }
 
   });
@@ -47,7 +47,7 @@ const Quotes = async () => {
         </div>
         {/* <Link href={"/dashboard/quotes"}> */}
         <form>
-          <input formAction={handleRefresh} name="button" id="button" className="hidden" />
+          <input type="submit" formAction={handleRefresh} id="button" className="hidden" />
           <Button className="bg-gray-400 hover:bg-gray-400 px-8 py-2 text-btn text-black rounded-lg">
             Refresh
           </Button>
