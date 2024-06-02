@@ -10,6 +10,8 @@ import axios from 'axios';
 import type { Pricing } from '@prisma/client';
 import { update } from '@/lib/action';
 import { useRouter } from 'next/navigation';
+import { PlusSquare } from 'lucide-react';
+
 
 const predefinedSurveyTypes = [
     "Survey Construction Report",
@@ -63,10 +65,10 @@ const EditPricingForm = ({ pricing: initialPricing }: PricingProps) => {
     };
 
     return (
-        <form onSubmit={onSubmit} className="space-y-4">
-            <div className="flex gap-4 items-center">
-                <div className="flex-1">
-                    <Label htmlFor="serviceName" className="!text-para">
+        <form onSubmit={onSubmit} className="space-y-5">
+            <div className="flex gap-4 items-start">
+                <div className="relative flex-1">
+                    <Label htmlFor="serviceName" className="!text-para block text-sm font-medium text-gray-700 mb-1">
                         Service Name
                     </Label>
                     <Input
@@ -74,14 +76,15 @@ const EditPricingForm = ({ pricing: initialPricing }: PricingProps) => {
                         value={serviceName}
                         onChange={(e) => setServiceName(e.target.value)}
                         placeholder="Enter service name"
+                        className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                     />
                     {serviceName === '' && (
-                        <Error message="Please enter the service name" />
+                        <Error message="Please enter the service name" className="absolute top-full mt-1 text-red-600" />
                     )}
                 </div>
 
-                <div className="flex-1">
-                    <Label htmlFor="pricing" className="!text-para">
+                <div className="relative flex-1 mb-2">
+                    <Label htmlFor="pricing" className="!text-para block text-sm font-medium text-gray-700 mb-1">
                         Pricing
                     </Label>
                     <Input
@@ -90,9 +93,10 @@ const EditPricingForm = ({ pricing: initialPricing }: PricingProps) => {
                         value={pricing}
                         onChange={(e) => setPricing(e.target.value)}
                         placeholder="Enter price"
+                        className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                     />
                     {pricing === '' && (
-                        <Error message="Please enter a valid price" />
+                        <Error message="Please enter a valid price" className="absolute top-full mt-1 text-red-600" />
                     )}
                 </div>
             </div>
@@ -104,10 +108,10 @@ const EditPricingForm = ({ pricing: initialPricing }: PricingProps) => {
                     {predefinedSurveyTypes.map((type) => (
                         <Button
                             key={type}
-                            type="button"
+                            type={"button"}
                             size={"lg"}
                             onClick={() => handleAddSurveyType(type)}
-                            className="text-btn p-2 rounded-3xl text-white bg-apex-blue hover:bg-apex-blue"
+                            className={`px-4 bg-white py-2 border rounded-full ${surveyType.includes(type) ? 'border-blue-500 bg-blue-500 text-white' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
                         >
                             {type}
                         </Button>
@@ -115,7 +119,7 @@ const EditPricingForm = ({ pricing: initialPricing }: PricingProps) => {
                 </div>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-3">
                 <Label htmlFor="surveyType" className="!text-para">
                     Custom Survey Type
                 </Label>
@@ -125,46 +129,50 @@ const EditPricingForm = ({ pricing: initialPricing }: PricingProps) => {
                         value={customSurveyType}
                         onChange={(e) => setCustomSurveyType(e.target.value)}
                         placeholder="Custom Survey Type"
-                        className="input"
+                        className="w-1/2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     <Button
-                        type="button"
+                        type='button'
                         onClick={() => handleAddSurveyType(customSurveyType)}
-                        className="text-btn p-2 text-white bg-apex-blue hover:bg-apex-blue"
+                        className="text-btn p-2 text-gray-500 bg-white hover:text-blue-500 hover:bg-white"
                     >
-                        Add
+                        <PlusSquare size={"30px"} />
                     </Button>
                     <br />
+                </div>
+                <ul className="list-none text-gray-700">
                     {surveyType.map((type) => (
-                        <div key={type} className="bg-blue-500 text-white rounded-full py-1 px-3 flex items-center justify-center">
+                        <li key={type} className="mb-2 flex items-center">
+                            <div className="w-4 h-0.5 bg-gray-400 mr-2" /> {/* Line element */}
                             <span>{type}</span>
                             <button
                                 type="button"
-                                className="ml-2 text-white hover:text-gray-200"
+                                className="text-gray text-md ml-2 hover:bg-gray-200"
                                 onClick={() => handleRemoveSurveyType(type)}
                             >
                                 &times;
                             </button>
-                        </div>
+                        </li>
                     ))}
-                </div>
-
+                </ul>
             </div>
-
-            <Button disabled={loading} type="submit" className="text-btn p-2 text-white bg-apex-blue hover:bg-apex-blue w-full text-center">
-                {loading && ( // Show loader if loading is true
-                    <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="flex flex-row gap-2">
-                            <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce" />
-                            <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.3s]" />
-                            <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.5s]" />
+            <div className='flex space-x-4'>
+                <Button disabled={loading} type="submit" className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600">
+                    {loading && ( // Show loader if loading is true
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="flex flex-row gap-2">
+                                <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce" />
+                                <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.3s]" />
+                                <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.5s]" />
+                            </div>
                         </div>
-                    </div>
-                )}
-                <span className={loading ? "opacity-0" : "opacity-100"}>
-                    Update
-                </span>
-            </Button>
+                    )}
+                    <span className={loading ? "opacity-0" : "opacity-100"}>
+                        Update
+                    </span>
+                </Button>
+                <Button onClick={() => route.push("/dashboard/pricing")} type='button' className='px-6 py-2 bg-red-500 text-white font-semibold rounded-md hover:bg-red-600'>Cancel</Button>
+            </div>
         </form>
     );
 };
