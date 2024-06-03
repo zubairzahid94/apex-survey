@@ -2,7 +2,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import type { Checkout, InstantQuote, Service } from "@prisma/client";
 import { Card } from '@/components/ui/card';
@@ -18,7 +18,7 @@ interface CheckoutProps {
 
 const UserDetails = ({ checkouts }: CheckoutProps) => {
     const route = useRouter()
-    const [status, setStatus] = useState<string | null>(null);
+    const [status, setStatus] = useState(checkouts.status);
     const [loading, setLoading] = useState(false);
 
     const handleStatus = async (id: string, newStatus: string) => {
@@ -142,9 +142,9 @@ const UserDetails = ({ checkouts }: CheckoutProps) => {
                                         </div>
                                         <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                                             <dt className="font-medium text-gray-900">Status</dt>
-                                            <dd className="text-gray-700 sm:col-span-2">{checkouts.status === 'Accepted' ? (
+                                            <dd className="text-gray-700 sm:col-span-2">{status === 'Accepted' ? (
                                                 <span className="px-2 py-1 bg-green-200 text-green-800 rounded-md">Accepted</span>
-                                            ) : checkouts.status === 'Declined' ? (
+                                            ) : status === 'Declined' ? (
                                                 <span className="px-2 py-1 bg-red-200 text-red-800 rounded-md">Declined</span>
                                             ) : (
                                                 <span className="px-2 py-1 bg-gray-200 text-gray-800 rounded-md">Pending</span>

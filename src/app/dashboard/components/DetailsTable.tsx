@@ -100,10 +100,11 @@ const DetailsTable = ({ checkouts, countCheckouts }: CheckoutProps) => {
               </th>
               <th className="text-center col-span-2 md:col-span-2">Full Name</th>
               <th className="text-center col-span-3 md:col-span-3 lg:col-span-3">Email</th>
-              <th className="text-center col-span-2 md:col-span-2 lg:col-span-2">Phone</th>
+              <th className="text-center col-span-2 md:col-span-2 lg:col-span-1">Phone</th>
               <th className="text-center col-span-2 md:col-span-2 lg:col-span-1">Contact Type</th>
               <th className="text-center col-span-2 md:col-span-2 lg:col-span-1">Status</th>
               <th className="text-center col-span-2 md:col-span-1 lg:col-span-1">Action</th>
+              <th className="text-center col-span-2 md:col-span-1 lg:col-span-2">Date</th>
             </tr>
           </thead>
           <tbody className="space-y-2">
@@ -119,7 +120,7 @@ const DetailsTable = ({ checkouts, countCheckouts }: CheckoutProps) => {
                 <td className="text-center col-span-3 md:col-span-3 lg:col-span-3">
                   <span className="block overflow-hidden text-ellipsis whitespace-pre-wrap">{order.email}</span>
                 </td>
-                <td className="text-center col-span-2 md:col-span-2 lg:col-span-2">{order.phone}</td>
+                <td className="text-center col-span-2 md:col-span-2 lg:col-span-1">{order.phone}</td>
                 <td className="text-center col-span-2 md:col-span-2 lg:col-span-1">{order.contactType}</td>
                 <td className={`text-center col-span-2 md:col-span-2 lg:col-span-1 ${order.status === "Pending" ? "text-yellow-500" : order.status === "Accepted" ? "text-green-500" : order.status === "Declined" ? "text-red-500" : ""}`}>
                   {order.status}
@@ -132,6 +133,7 @@ const DetailsTable = ({ checkouts, countCheckouts }: CheckoutProps) => {
                     Detail
                   </Button>
                 </td>
+                <td className="text-center col-span-2 md:col-span-2 lg:col-span-2">{order.createdAt.toDateString()}</td>
               </tr>
             ))}
           </tbody>
